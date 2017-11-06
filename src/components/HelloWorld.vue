@@ -1,56 +1,49 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-    <div>
-      <el-time-select v-model="value1" :picker-options="{start: '08:30',step: '00:15',end: '18:30'}" placeholder="选择时间"></el-time-select>
-    </div>
-  </div>
+  <el-container class="hello">
+    <el-header id="header">
+      <el-button type="text" class="header-button">登录</el-button>
+      <el-button type="text" class="header-button">注册</el-button>
+    </el-header>
+    <el-main id="main">
+      <!--<img src="../assets/background.jpg">-->
+    </el-main>
+  </el-container>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      value1: ''
+  export default {
+    name: 'HelloWorld',
+    data () {
+      return {
+        msg: 'Welcome to Your Vue.js App',
+        value1: '',
+        color: 'white'
+      }
+    },
+    methods: {
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+  #main{
+    padding: 0;
+    margin: -60px;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  #header{
+    background-color: #81eec1;
+    padding: 0 10% 0 10%;
+    opacity: 0.5;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  .header-button{
+    color: white;
+    font-size: 18px;
+  }
 
-a {
-  color: #42b983;
-}
+  .header-button:hover{
+    color: #10e08a;
+  }
 </style>
