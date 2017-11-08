@@ -1,17 +1,18 @@
 <template>
-  <div id="header">
-    <el-button type="text" id="logo">logo</el-button>
+  <div>
+    <div id="header">
+      <el-button type="text" id="logo">logo</el-button>
 
-    <!--<el-input id="search"-->
-              <!--placeholder="请输入内容"-->
-              <!--prefix-icon="el-icon-search">-->
-    <!--</el-input>-->
+      <div id="login">
+        <el-input id="search" placeholder="请输入内容"></el-input>
+        <el-button type="text" class="header-button">登录</el-button>
+        <el-button type="text" class="header-button">注册</el-button>
+      </div>
 
-    <div id="login">
-      <el-button type="text" class="header-button">登录</el-button>
-      <el-button type="text" class="header-button">注册</el-button>
     </div>
-
+    <div id="main">
+      <img src="../assets/logo.png"/>
+    </div>
   </div>
 </template>
 
@@ -33,37 +34,61 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
   #main{
     padding: 0;
-    margin-top: -60px;
+    height: 1000px;
+    margin-top: 60px;
   }
 
   #logo{
+    margin-left: 10%;
   }
 
-  #search{
-    margin-right: 10px;
+  /*#search{*/
+    /*margin-right: 10px;*/
+    /*width: 250px !important;*/
+    /*border-radius: 20px !important;*/
+    /*border: 1px solid black !important;*/
+  /*}*/
+
+  .el-input{
     width: 250px;
+    height: 33px;
+  }
+
+  .el-input__inner{
+    width: 250px;
+    height: 33px;
+    font-size: 13px;
+    border: 1px solid #e9e9e9;
+    border-radius: 20px;
   }
 
   #header{
+    position: fixed;
+    left:0;
+    top: 0;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 10% 0 10%;
+    background-color: #f2f2f2;
+    /*padding: 0 100px 0 100px;*/
     height: 60px;
   }
 
   #login{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     flex-grow: 1;
+    margin-right: 10%;
   }
 
   .header-button{
-    /*color: white;*/
+    /*color: #020202;*/
     font-size: 18px;
 
   }
