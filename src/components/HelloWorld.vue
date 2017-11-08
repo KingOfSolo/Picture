@@ -1,17 +1,24 @@
 <template>
-  <el-container class="hello">
-    <el-header id="header">
+  <div id="header">
+    <el-button type="text" id="logo">logo</el-button>
+
+    <!--<el-input id="search"-->
+              <!--placeholder="请输入内容"-->
+              <!--prefix-icon="el-icon-search">-->
+    <!--</el-input>-->
+
+    <div id="login">
       <el-button type="text" class="header-button">登录</el-button>
       <el-button type="text" class="header-button">注册</el-button>
-    </el-header>
-    <el-main id="main">
-      <!--<img src="../assets/background.jpg">-->
-    </el-main>
-  </el-container>
+    </div>
+
+  </div>
 </template>
 
 <script>
+  import ElButton from '../../node_modules/element-ui/packages/button/src/button'
   export default {
+    components: {ElButton},
     name: 'HelloWorld',
     data () {
       return {
@@ -29,21 +36,39 @@
 <style scoped>
   #main{
     padding: 0;
-    margin: -60px;
+    margin-top: -60px;
+  }
+
+  #logo{
+  }
+
+  #search{
+    margin-right: 10px;
+    width: 250px;
   }
 
   #header{
-    background-color: #81eec1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     padding: 0 10% 0 10%;
-    opacity: 0.5;
+    height: 60px;
+  }
+
+  #login{
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
   }
 
   .header-button{
-    color: white;
+    /*color: white;*/
     font-size: 18px;
+
   }
 
   .header-button:hover{
-    color: #10e08a;
+    color: #10cf7d;
   }
 </style>
