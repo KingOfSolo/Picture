@@ -4,9 +4,27 @@
       <el-button type="text" id="logo">logo</el-button>
 
       <div id="login">
-        <el-input id="search" placeholder="请输入内容"></el-input>
-        <el-button type="text" class="header-button">登录</el-button>
-        <el-button type="text" class="header-button">注册</el-button>
+        <div>
+          <el-input id="search" placeholder="请输入内容"><img slot="suffix" class="el-input__icon" src="../assets/search.svg"></el-input>
+        </div>
+        <div v-if="isLogin">
+          <el-button type="text" class="header-button" @click="isLogin = false">登录</el-button>
+          <el-button type="text" class="header-button" >注册</el-button>
+        </div>
+        <div v-else>
+          <el-dropdown style="margin-left: 10px" @command="handleCommand">
+          <span class="el-dropdown-link">
+            <img id="head-portrait" src="../assets/user.jpg"/>
+          </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="a">账号设置</el-dropdown-item>
+              <el-dropdown-item command="b">我的关注</el-dropdown-item>
+              <el-dropdown-item command="c">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+
+
       </div>
 
     </div>
@@ -25,10 +43,16 @@
       return {
         msg: 'Welcome to Your Vue.js App',
         value1: '',
-        color: 'white'
+        color: 'white',
+        isLogin: true
       }
     },
     methods: {
+      handleCommand (command) {
+        if (command === 'c') {
+          this.isLogin = true
+        }
+      }
     }
   }
 </script>
@@ -46,10 +70,10 @@
   }
 
   /*#search{*/
-    /*margin-right: 10px;*/
-    /*width: 250px !important;*/
-    /*border-radius: 20px !important;*/
-    /*border: 1px solid black !important;*/
+  /*margin-right: 10px;*/
+  /*width: 250px !important;*/
+  /*border-radius: 20px !important;*/
+  /*border: 1px solid black !important;*/
   /*}*/
 
   .el-input{
@@ -60,10 +84,20 @@
   .el-input__inner{
     width: 250px;
     height: 33px;
-    font-size: 13px;
-    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    /*border: 1px solid #e9e9e9;*/
     border-radius: 20px;
   }
+
+  .el-input__icon{
+    width: 15px;
+    margin-right: 5px;
+  }
+
+
+  /*.el-input__suffix-inner{*/
+  /*height: 33px;*/
+  /*}*/
 
   #header{
     position: fixed;
@@ -90,10 +124,17 @@
   .header-button{
     /*color: #020202;*/
     font-size: 18px;
+    margin-left: 10px;
 
   }
 
   .header-button:hover{
     color: #10cf7d;
+  }
+
+  #head-portrait{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
   }
 </style>
