@@ -1,36 +1,6 @@
 <template>
   <div>
-    <div id="header">
-      <el-button type="text" id="logo">logo</el-button>
-
-      <div id="login">
-        <div>
-          <el-input id="search" placeholder="请输入内容"><img slot="suffix" class="el-input__icon" src="../assets/search.svg"></el-input>
-        </div>
-        <div v-if="isLogin">
-          <el-button type="text" class="header-button" @click="isLogin = false">登录</el-button>
-          <el-button type="text" class="header-button" >注册</el-button>
-        </div>
-        <div v-else>
-          <el-dropdown style="margin-left: 10px" @command="handleCommand">
-          <span class="el-dropdown-link">
-            <img id="head-portrait" src="../assets/user.jpg"/>
-          </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">账号设置</el-dropdown-item>
-              <el-dropdown-item command="b">我的关注</el-dropdown-item>
-              <el-dropdown-item command="c">退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-
-
-      </div>
-
-    </div>
-    <div id="main">
-      <img src="../assets/logo.png"/>
-    </div>
+    <img src="../assets/logo.png"/>
   </div>
 </template>
 
@@ -49,7 +19,11 @@
     },
     methods: {
       handleCommand (command) {
-        if (command === 'c') {
+        if (command === 'a') {
+          this.$router.push({name: 'UserSetting', params: {userId: '0001'}})
+        } else if (command === 'b') {
+          this.$router.push()
+        } else if (command === 'c') {
           this.isLogin = true
         }
       }
