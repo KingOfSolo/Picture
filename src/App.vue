@@ -70,10 +70,9 @@
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   margin: 0;
   padding: 0;
+  background-color: #f3f3f3;
 }
   #main{
     padding: 0;
@@ -103,6 +102,7 @@
     font-size: 14px;
     /*border: 1px solid #e9e9e9;*/
     border-radius: 20px;
+    background-color: #f7f8f9;
   }
 
   .el-input__icon{
@@ -124,9 +124,10 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    background-color: #f2f2f2;
+    background-color: white;
     /*padding: 0 100px 0 100px;*/
     height: 60px;
+    box-shadow: 0 0 5px #d2d2d2;
   }
 
   #login{

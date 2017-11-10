@@ -1,5 +1,105 @@
 <template>
-  <div>
-    <p>用户账号设置 User {{ $route.params.userId}}</p>
+  <div id="user-center">
+    <div id="user-center-header">
+      <div id="user-center-header-background">
+        <img src="../assets/user.jpg" id="user-center-header-image"/>
+      </div>
+      <div id="user-center-header-body">
+        <p id="user-center-header-username">只为红颜</p>
+        <div id="user-center-header-introduce-container">
+          <span id="user-center-header-introduce">你是一只修行千年的狐 我是一介书生独醉江湖</span>
+          <div id="user-center-header-introduce-button">
+            <el-button size="medium">修改个性签名</el-button>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </template>
+
+
+<script>
+  import ElButton from '../../node_modules/element-ui/packages/button/src/button'
+  export default{
+    components: {ElButton},
+    data () {
+      return {
+        msg1: 'sss'
+      }
+    }
+  }
+</script>
+
+<style>
+  #user-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  #user-center-header{
+    display: inline-block;
+    width: 1000px;
+    height: 250px;
+    background-color: white;
+    box-shadow: 0 0 5px #d2d2d2;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+
+  #user-center-header-background{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 130px;
+    background-color: #c9d8f8;
+    border-radius: 5px 5px 0 0;
+  }
+
+  #user-center-header-image{
+    width: 160px;
+    height: 160px;
+    border-radius: 5px;
+    border: 5px solid white;
+    margin: 0 0 -100px 20px;
+  }
+
+  #user-center-header-body{
+    margin-top: 15px;
+    height: 100px;
+    background-color: white;
+  }
+
+  #user-center-header-username{
+    margin:0 0 15px 220px;
+    font-size: 25px;
+    font-weight: normal;
+    color: #222222;
+  }
+
+  #user-center-header-introduce-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #user-center-header-introduce{
+    margin-left: 220px;
+    font-size: 15px;
+    color: #858585;
+  }
+
+  #user-center-header-introduce-button{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+    margin-right: 20px;
+  }
+
+
+
+</style>
+
