@@ -7,9 +7,14 @@
       <div id="user-center-header-body">
         <p id="user-center-header-username">只为红颜</p>
         <div id="user-center-header-introduce-container">
-          <span id="user-center-header-introduce">你是一只修行千年的狐 我是一介书生独醉江湖</span>
+          <span v-if="showSignature" id="user-center-header-introduce">{{ signature}}</span>
+          <el-input v-else v-model="signature" id="signature-input" maxlength="40"></el-input>
           <div id="user-center-header-introduce-button">
-            <el-button size="medium">修改个性签名</el-button>
+            <el-button v-if="showSignature" size="medium" @click="showSignature = false; beforeSignature = signature">修改个性签名</el-button>
+            <div v-else>
+              <el-button size="medium" type="success" @click="showSignature = true" style="background-color: #10cf7d;border-color: #10cf7d">保存</el-button>
+              <el-button size="medium" @click="showSignature = true; signature = beforeSignature">取消</el-button>
+            </div>
           </div>
         </div>
 
@@ -21,12 +26,20 @@
 
 <script>
   import ElButton from '../../node_modules/element-ui/packages/button/src/button'
+  import ElInput from '../../node_modules/element-ui/packages/input/src/input'
   export default{
-    components: {ElButton},
+    components: {
+      ElInput,
+      ElButton},
     data () {
       return {
-        msg1: 'sss'
+        msg1: 'sss',
+        signature: '你是一只修行千年的狐 我是一介书生独醉江湖',
+        beforeSignature: '',
+        showSignature: true
       }
+    },
+    methods: {
     }
   }
 </script>
@@ -97,6 +110,17 @@
     align-items: center;
     flex-grow: 1;
     margin-right: 20px;
+  }
+
+  #signature-input{
+    margin-left: 220px;
+    border-radius: 0;
+    height: 40px;
+    font-size: 15px;
+    background-color: white;
+    border-width:  0 0 1px 0;
+    padding: 0;
+    width: 500px;
   }
 
 
