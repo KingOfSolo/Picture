@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/Main'
-import UserSetting from '@/components/UserSetting'
+import Main from '@/pages/Main'
+import UserSetting from '@/pages/UserSetting'
 
 Vue.use(Router)
 

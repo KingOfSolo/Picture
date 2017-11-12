@@ -26,7 +26,7 @@
         <el-tabs :tab-position="tabPosition" style="margin: 10px">
           <el-tab-pane>
             <span slot="label">个人资料</span>
-            个人资料
+            <user-info></user-info>
           </el-tab-pane>
           <el-tab-pane>
             <span slot="label">我的关注</span>
@@ -47,10 +47,12 @@
 <script>
   import ElButton from '../../node_modules/element-ui/packages/button/src/button'
   import ElInput from '../../node_modules/element-ui/packages/input/src/input'
+  import UserInfo from '../components/userInfo.vue'
   export default{
     components: {
       ElInput,
-      ElButton},
+      ElButton,
+      UserInfo},
     data () {
       return {
         msg1: 'sss',
