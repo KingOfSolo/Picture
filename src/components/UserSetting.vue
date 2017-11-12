@@ -1,25 +1,45 @@
 <template>
   <div id="user-center">
-    <div id="user-center-header">
-      <div id="user-center-header-background">
-        <img src="../assets/user.jpg" id="user-center-header-image"/>
-      </div>
-      <div id="user-center-header-body">
-        <p id="user-center-header-username">只为红颜</p>
-        <div id="user-center-header-introduce-container">
-          <span v-if="showSignature" id="user-center-header-introduce">{{ signature}}</span>
-          <el-input v-else v-model="signature" id="signature-input" maxlength="40"></el-input>
-          <div id="user-center-header-introduce-button">
-            <el-button v-if="showSignature" size="medium" @click="showSignature = false; beforeSignature = signature">修改个性签名</el-button>
-            <div v-else>
-              <el-button size="medium" type="success" @click="showSignature = true" style="background-color: #10cf7d;border-color: #10cf7d">保存</el-button>
-              <el-button size="medium" @click="showSignature = true; signature = beforeSignature">取消</el-button>
+    <div style="text-align: center">
+      <div id="user-center-header">
+        <div id="user-center-header-background">
+          <img src="../assets/user.jpg" id="user-center-header-image"/>
+        </div>
+        <div id="user-center-header-body">
+          <p id="user-center-header-username">只为红颜</p>
+          <div id="user-center-header-introduce-container">
+            <span v-if="showSignature" id="user-center-header-introduce">{{ signature}}</span>
+            <el-input v-else v-model="signature" id="signature-input" maxlength="40"></el-input>
+            <div id="user-center-header-introduce-button">
+              <el-button v-if="showSignature" size="medium" @click="showSignature = false; beforeSignature = signature">修改个性签名</el-button>
+              <div v-else>
+                <el-button size="medium" type="success" @click="showSignature = true" style="background-color: #10cf7d;border-color: #10cf7d">保存</el-button>
+                <el-button size="medium" @click="showSignature = true; signature = beforeSignature">取消</el-button>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
+    <div style="text-align: center">
+      <div id="user-center-main">
+        <el-tabs :tab-position="tabPosition" style="margin: 10px">
+          <el-tab-pane>
+            <span slot="label">个人资料</span>
+            个人资料
+          </el-tab-pane>
+          <el-tab-pane>
+            <span slot="label">我的关注</span>
+            我的关注
+          </el-tab-pane>
+          <el-tab-pane>
+            <span slot="label">角色管理</span>
+            角色管理</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -36,7 +56,8 @@
         msg1: 'sss',
         signature: '你是一只修行千年的狐 我是一介书生独醉江湖',
         beforeSignature: '',
-        showSignature: true
+        showSignature: true,
+        tabPosition: 'left'
       }
     },
     methods: {
@@ -46,9 +67,6 @@
 
 <style>
   #user-center{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
   }
 
   #user-center-header{
@@ -89,6 +107,7 @@
     font-size: 25px;
     font-weight: normal;
     color: #222222;
+    text-align: left;
   }
 
   #user-center-header-introduce-container{
@@ -123,6 +142,18 @@
     width: 500px;
   }
 
+  #user-center-main{
+    display: inline-block;
+    width: 1000px;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #d2d2d2;
+  }
+
+  #user-center-main .el-tabs__item{
+    font-size: 17px;
+  }
 
 
 </style>
