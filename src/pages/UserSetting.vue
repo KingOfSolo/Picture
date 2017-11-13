@@ -157,6 +157,10 @@
     font-size: 17px;
   }
 
+  #user-center-main .el-tabs__header{
+    margin-top: 30px;
+  }
+
 
 </style>
 
