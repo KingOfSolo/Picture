@@ -14,7 +14,5 @@
 </script>
 
 <style>
-  .editHidden{
-    opacity: 0;
-  }
+
 </style>

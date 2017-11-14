@@ -91,12 +91,12 @@
   /*border: 1px solid black !important;*/
   /*}*/
 
-  .el-input{
+  #login .el-input{
     width: 250px;
     height: 33px;
   }
 
-  .el-input__inner{
+  #login .el-input__inner{
     width: 250px;
     height: 33px;
     font-size: 14px;
@@ -105,7 +105,7 @@
     background-color: #f7f8f9;
   }
 
-  .el-input__icon{
+  #login .el-input__icon{
     width: 15px;
     margin-right: 5px;
   }
