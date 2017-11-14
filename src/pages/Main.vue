@@ -1,12 +1,15 @@
 <template>
-  <div>
-    <img src="../assets/background.jpg" id="background-image"/>
+  <div style="text-align: center">
+    <picture-display></picture-display>
   </div>
 </template>
 
 <script>
+  import pictureDisplay from '../components/pictureDisplay.vue'
   export default {
-    name: 'HelloWorld',
+    components: {
+      pictureDisplay
+    },
     data () {
       return {
         msg: 'Welcome to Your Vue.js App'
@@ -20,9 +23,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   #main{
-    padding: 0;
     height: 1000px;
-    margin-top: 60px;
   }
 
   #background-image{
