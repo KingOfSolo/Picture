@@ -74,15 +74,42 @@
     <form class="user-info-form" @mouseenter="formEnter(4)" @mouseleave="formLeave(4)">
       <h3 class="form-label">绑定手机</h3>
       <div class="form-content">
-        <span class="form-text">未绑定</span>
-        <el-button type="text" icon="el-icon-edit" v-bind:class="{ editHidden: showEdit.show4 }">修改</el-button>
+        <div v-if="showEditContent.show4">
+          <span class="form-text">未绑定</span>
+          <el-button type="text" v-on:click="editButtonClick(4)" icon="el-icon-edit" v-bind:class="{ editHidden: showEdit.show4 }">修改</el-button>
+        </div>
+        <div v-else>
+          <el-form>
+            <el-form-item>
+              <el-input></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary">保存</el-button>
+              <el-button v-on:click="editCancel(4)">取消</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+
       </div>
     </form>
     <form class="user-info-form" @mouseenter="formEnter(5)" @mouseleave="formLeave(5)">
       <h3 class="form-label">个人简介</h3>
       <div class="form-content">
-        <span class="form-text">世间所有的相遇 都是久别重逢</span>
-        <el-button type="text" icon="el-icon-edit" v-bind:class="{ editHidden: showEdit.show5 }">修改</el-button>
+        <div v-if="showEditContent.show5">
+          <span class="form-text">世间所有的相遇 都是久别重逢</span>
+          <el-button type="text" v-on:click="editButtonClick(5)" icon="el-icon-edit" v-bind:class="{ editHidden: showEdit.show5 }">修改</el-button>
+        </div>
+        <div v-else>
+          <el-form>
+            <el-form-item>
+              <el-input type="textarea" style="width: 400px" :autosize="{ minRows: 3, maxRows: 5}"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary">保存</el-button>
+              <el-button v-on:click="editCancel(5)">取消</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </form>
   </div>
@@ -209,6 +236,10 @@
   .user-info-form{
     padding: 30px 0 30px 0;
     border-bottom: 1px solid #ebeef5;
+    transition: height 0.5s;
+    -moz-transition: height 0.5s; /* Firefox 4 */
+    -webkit-transition: height 0.5s; /* Safari 和 Chrome */
+    -o-transition: height 0.5s; /* Opera */
   }
 
   .form-label{

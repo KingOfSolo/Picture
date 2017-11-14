@@ -148,7 +148,7 @@
     display: inline-block;
     width: 1000px;
     background-color: white;
-    margin-top: 10px;
+    margin: 10px 0 10px 0;
     border-radius: 5px;
     box-shadow: 0 0 5px #d2d2d2;
   }
