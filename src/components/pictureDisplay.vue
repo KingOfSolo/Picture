@@ -4,10 +4,10 @@
     <div>
       <div id="picture-display-bottom">
         <img src="../assets/user.jpg"/>
-        <span>只为红颜</span>
+        <span style="cursor: pointer">只为红颜</span>
         <div id="picture-display-button">
-          <span><img src="../assets/like.png"/><span style="line-height: 20px">0</span></span>
-          <span><img src="../assets/comment.png"/><span style="line-height: 20px">0</span></span>
+          <span class="picture-icon" style="padding-right: 10px"><i class="fa fa-heart"></i><span class="picture-icon-num">0</span></span>
+          <span class="picture-icon"><i class="fa fa-comments"></i><span class="picture-icon-num">0</span></span>
         </div>
       </div>
     </div>
@@ -25,6 +25,8 @@
 </script>
 
 <style>
+  @import "../style/font-awesome-4.7.0/css/font-awesome.min.css";
+
   #picture-display{
     background-color: white;
     display: inline-block;
@@ -34,6 +36,14 @@
   .image{
     width: 100%;
     display: block;
+    cursor:pointer;
+  }
+
+  .image:hover{
+    -moz-opacity:0.7;
+    opacity: 0.7;
+    filter: alpha(Opacity=70);
+    background: #222222;
   }
 
   #picture-display-bottom{
@@ -44,10 +54,10 @@
     height: 60px;
   }
 
-  #picture-display .button {
-    padding: 0;
-    float: right;
-  }
+  /*#picture-display .button {*/
+    /*padding: 0;*/
+    /*float: right;*/
+  /*}*/
 
   .image {
     width: 100%;
@@ -64,6 +74,7 @@
     height: 40px;
     border-radius: 50%;
     padding-right: 3px;
+    cursor: pointer;
   }
 
   #picture-display-button{
@@ -77,5 +88,18 @@
   #picture-display-button img{
     width: 20px;
     height: 20px;
+    border-radius: 0;
+  }
+
+  .picture-icon{
+    line-height: 1;
+    color: #e0e0e0;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .picture-icon-num{
+    color: #222222;
+    margin-left: 5px;
   }
 </style>
