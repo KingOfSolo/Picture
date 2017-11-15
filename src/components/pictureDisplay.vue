@@ -3,7 +3,7 @@
     <div class="post-item">
       <div class="post-body">
         <img src="../assets/picture.jpg" class="image"/>
-        <div class="image-mask">
+        <div class="image-mask" @click="showDialog">
         </div>
       </div>
     </div>
@@ -18,8 +18,10 @@
         </div>
       </div>
     </div>
+    <el-dialog title="图片展示" :visible.sync="dialogVisible">
+      <img src="../assets/picture.jpg"/>
+    </el-dialog>
   </div>
-
 </template>
 
 <script>
@@ -29,7 +31,8 @@
         currentDate: new Date(),
         showMask: false,
         isHeart: false,
-        heartNum: 0
+        heartNum: 0,
+        dialogVisible: false
       }
     },
     methods: {
@@ -41,6 +44,9 @@
           this.isHeart = !this.isHeart
           this.heartNum += 1
         }
+      },
+      showDialog: function () {
+        this.dialogVisible = true
       }
     }
   }
