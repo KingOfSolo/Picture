@@ -127,7 +127,7 @@
     /*padding: 0 100px 0 100px;*/
     height: 60px;
     box-shadow: 0 0 5px #d2d2d2;
-    z-index: 10000;
+    z-index: 100;
   }
 
   #login{

@@ -18,13 +18,38 @@
         </div>
       </div>
     </div>
-    <el-dialog title="图片展示" :visible.sync="dialogVisible">
-      <img src="../assets/picture.jpg"/>
+    <el-dialog :visible.sync="dialogVisible" class="image-dialog" fullscreen>
+      <div class="picture-main">
+        <div class="swiper-container gallery-top horizontal">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="../assets/picture.jpg"/>
+            </div>
+            <div class="swiper-slide">
+              <img src="../assets/user.jpg">
+            </div>
+          </div>
+          <!-- 如果需要导航按钮 -->
+          <div class="swiper-button-prev" @click="prevPicture"></div>
+          <div class="swiper-button-next" @click="nextPicture"></div>
+        </div>
+        <div class="swiper-container gallery-thumbs horizontal">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="../assets/picture.jpg"/>
+            </div>
+            <div class="swiper-slide">
+              <img src="../assets/user.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+  import Swiper from '../../static/swiper-3.4.2.min.js'
   export default{
     data () {
       return {
@@ -48,13 +73,31 @@
       showDialog: function () {
         this.dialogVisible = true
       }
+    },
+    mounted () {
+      var mySwiper = new Swiper('.swiper-container', {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 10,
+        slidesPerView: 1
+      })
+
+      var galleryThumbs = new Swiper('.gallery-thumbs', {
+        spaceBetween: 10,
+        slidesPreView: 3,
+        slideToClickedSlide: true
+      })
+
+      mySwiper.params.control = galleryThumbs
+      galleryThumbs.params.control = mySwiper
+      console.log(mySwiper + galleryThumbs)
     }
   }
 </script>
 
 <style>
   @import "../style/font-awesome-4.7.0/css/font-awesome.min.css";
-
+  @import "../../static/swiper-3.4.2.min.css";
 
   #picture-display{
     height: 441px;
@@ -181,5 +224,51 @@
 
   .redColor{
     color: #e60905;
+  }
+
+  #picture-display .el-dialog__wrapper{
+    padding: 25px 50px 25px 50px;
+  }
+
+  #picture-display .el-dialog__header{
+    height: 30px;
+    font-size: 15px;
+  }
+
+  .picture-main{
+    position: absolute;
+    top: 55px;
+    right: 320px;
+    bottom: 0;
+    left: 0;
+  }
+
+  .picture-main .gallery-top{
+    position: absolute;
+    top: 0;
+    bottom: 110px;
+    left: 0;
+    right: 0;
+  }
+
+  .picture-main .gallery-thumbs{
+    position: absolute;
+    bottom: 0;
+    height: 110px;
+    width: 100%;
+  }
+
+  .gallery-thumbs {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+  .gallery-thumbs .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+  }
+  .gallery-thumbs .swiper-slide-active {
+    opacity: 1;
   }
 </style>
