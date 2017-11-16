@@ -20,27 +20,20 @@
     </div>
     <el-dialog :visible.sync="dialogVisible" class="image-dialog" fullscreen>
       <div class="picture-main">
-        <div class="swiper-container gallery-top horizontal">
+        <div class="swiper-container gallery-top">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="../assets/picture.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="../assets/user.jpg">
-            </div>
+            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851908612&di=4f6802ca072e04fc08d442c97fdc7f39&imgtype=0&src=http%3A%2F%2Fimg.juimg.com%2Ftuku%2Fyulantu%2F140313%2F330457-14031320362254.jpg"></div>
+            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>
           </div>
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev" @click="prevPicture"></div>
-          <div class="swiper-button-next" @click="nextPicture"></div>
+          <!-- Add Arrows -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
         </div>
-        <div class="swiper-container gallery-thumbs horizontal">
+
+        <div class="swiper-container gallery-thumbs">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="../assets/picture.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="../assets/user.jpg">
-            </div>
+            <div class="swiper-slide swiper-slide-active" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851908612&di=4f6802ca072e04fc08d442c97fdc7f39&imgtype=0&src=http%3A%2F%2Fimg.juimg.com%2Ftuku%2Fyulantu%2F140313%2F330457-14031320362254.jpg)"></div>
+            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>
           </div>
         </div>
       </div>
@@ -48,8 +41,9 @@
   </div>
 </template>
 
+
 <script>
-  import Swiper from '../../static/swiper-3.4.2.min.js'
+  import Swiper from '../../static/swiper.min.js'
   export default{
     data () {
       return {
@@ -75,29 +69,29 @@
       }
     },
     mounted () {
-      var mySwiper = new Swiper('.swiper-container', {
+      var galleryTop = new Swiper('.gallery-top', {
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
-        spaceBetween: 10,
-        slidesPerView: 1
+        spaceBetween: 10
       })
 
       var galleryThumbs = new Swiper('.gallery-thumbs', {
         spaceBetween: 10,
-        slidesPreView: 3,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        touchRatio: 0.2,
         slideToClickedSlide: true
       })
 
-      mySwiper.params.control = galleryThumbs
-      galleryThumbs.params.control = mySwiper
-      console.log(mySwiper + galleryThumbs)
+      galleryTop.params.control = galleryThumbs
+      galleryThumbs.params.control = galleryTop
     }
   }
 </script>
 
 <style>
   @import "../style/font-awesome-4.7.0/css/font-awesome.min.css";
-  @import "../../static/swiper-3.4.2.min.css";
+  @import "../../static/swiper.min.css";
 
   #picture-display{
     height: 441px;
@@ -243,21 +237,49 @@
     left: 0;
   }
 
-  .picture-main .gallery-top{
-    position: absolute;
-    top: 0;
-    bottom: 110px;
-    left: 0;
-    right: 0;
-  }
+  /*.picture-main .gallery-top{*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*bottom: 110px;*/
+    /*left: 0;*/
+    /*right: 0;*/
+  /*}*/
 
-  .picture-main .gallery-thumbs{
-    position: absolute;
-    bottom: 0;
-    height: 110px;
+  /*.picture-main .gallery-thumbs{*/
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*height: 110px;*/
+    /*width: 100%;*/
+  /*}*/
+
+  /*.gallery-thumbs {*/
+    /*height: 20%;*/
+    /*box-sizing: border-box;*/
+    /*padding: 10px 0;*/
+  /*}*/
+  /*.gallery-thumbs .swiper-slide {*/
+    /*width: 25%;*/
+    /*height: 100%;*/
+    /*opacity: 0.4;*/
+  /*}*/
+  /*.gallery-thumbs .swiper-slide-active {*/
+    /*opacity: 1;*/
+  /*}*/
+
+  .swiper-container {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+  .gallery-top {
+    height: 80%;
     width: 100%;
   }
-
   .gallery-thumbs {
     height: 20%;
     box-sizing: border-box;
