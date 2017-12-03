@@ -1,28 +1,28 @@
 <template>
   <div id="picture-display">
     <div class="post-item">
-      <div class="post-body">
+      <div class="post-body" v-on:mouseenter="imageMaskEnter" v-on:mouseleave="imageMaskLeave">
         <img src="../assets/picture.jpg" class="image"/>
-        <div class="image-mask" @click="showDialog">
+        <div class="image-mask" v-bind:class="{maskOpacity: maskShow}" @click="showDialog"></div>
+        <div id="picture-display-bottom" v-if="pictureContentShow">
+          <img src="../assets/user.jpg"/>
+          <span style="cursor: pointer">只为红颜</span>
+          <div id="picture-display-button">
+          <span class="picture-icon" style="padding-right: 10px" v-bind:class="{redColor: isHeart}" @click="heartClick">
+            <i class="fa fa-heart"></i><span class="picture-icon-num">{{ heartNum }}</span></span>
+            <span class="picture-icon"><i class="fa fa-comments"></i><span class="picture-icon-num">0</span></span>
+          </div>
         </div>
       </div>
     </div>
     <div>
-      <div id="picture-display-bottom">
-        <img src="../assets/user.jpg"/>
-        <span style="cursor: pointer">只为红颜</span>
-        <div id="picture-display-button">
-          <span class="picture-icon" style="padding-right: 10px" v-bind:class="{redColor: isHeart}" @click="heartClick">
-            <i class="fa fa-heart"></i><span class="picture-icon-num">{{ heartNum }}</span></span>
-          <span class="picture-icon"><i class="fa fa-comments"></i><span class="picture-icon-num">0</span></span>
-        </div>
-      </div>
+
     </div>
     <el-dialog :visible.sync="dialogVisible" class="image-dialog" fullscreen>
       <div class="picture-main">
         <div class="swiper-container gallery-top">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851908612&di=4f6802ca072e04fc08d442c97fdc7f39&imgtype=0&src=http%3A%2F%2Fimg.juimg.com%2Ftuku%2Fyulantu%2F140313%2F330457-14031320362254.jpg"></div>
+            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851908612&di=4f6802ca072e04fc08d442c97fdc7f39&imgtype=0&src=http%3A%2F%2Fimg.juimg.com%2Ftuku%2Fyulantu%2F140313%2F330457-14031320362254.jpg)"></div>
             <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>
           </div>
           <!-- Add Arrows -->
@@ -51,7 +51,9 @@
         showMask: false,
         isHeart: false,
         heartNum: 0,
-        dialogVisible: false
+        dialogVisible: false,
+        maskShow: false,
+        pictureContentShow: false
       }
     },
     methods: {
@@ -66,6 +68,14 @@
       },
       showDialog: function () {
         this.dialogVisible = true
+      },
+      imageMaskEnter: function () {
+        this.pictureContentShow = true
+        this.maskShow = true
+      },
+      imageMaskLeave: function () {
+        this.pictureContentShow = false
+        this.maskShow = false
       }
     },
     mounted () {
@@ -94,13 +104,13 @@
   @import "../../static/swiper.min.css";
 
   #picture-display{
-    height: 441px;
-    width: 508px;
+    height: 381px;
+    width: 450px;
     display: inline-block;
     padding: 7px;
     position: relative;
     vertical-align: top;
-    padding: 5px 5px 66px;
+    padding: 5px 5px 6px;
     margin-left: 0px;
     margin-bottom: 0px;
   }
@@ -110,7 +120,7 @@
     left: 5px;
     right: 5px;
     top: 5px;
-    bottom: 65px;
+    bottom: 5px;
     background-color: #ffffff;
   }
 
@@ -119,7 +129,7 @@
     left: 6px;
     top:6px;
     right: 6px;
-    bottom: 0px;
+    bottom: 6px;
   }
 
   .image{
@@ -150,9 +160,13 @@
     background: radial-gradient(circle, #444444, #222222, #000000); /* Standard syntax */
   }
 
-  .image-mask:hover{
+  .maskOpacity{
     opacity: 0.5;
   }
+
+  /*.image-mask:hover{*/
+    /*opacity: 0.5;*/
+  /*}*/
 
   #picture-display-bottom{
     position: absolute;
@@ -165,9 +179,8 @@
     justify-content: flex-start;
     align-items: center;
     height: 60px;
-    background-color: white;
     font-size: 15px;
-    color: #222222;
+    color: white;
   }
 
   /*#picture-display .button {*/
@@ -206,13 +219,13 @@
 
   .picture-icon{
     line-height: 1;
-    color: #e0e0e0;
+    color: white;
     font-size: 15px;
     cursor: pointer;
   }
 
   .picture-icon-num{
-    color: #222222;
+    color: white;
     margin-left: 5px;
   }
 
