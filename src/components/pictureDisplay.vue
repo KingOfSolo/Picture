@@ -22,8 +22,7 @@
       <div class="picture-main">
         <div class="swiper-container gallery-top">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851908612&di=4f6802ca072e04fc08d442c97fdc7f39&imgtype=0&src=http%3A%2F%2Fimg.juimg.com%2Ftuku%2Fyulantu%2F140313%2F330457-14031320362254.jpg)"></div>
-            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>
+            <!--<div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>-->
           </div>
           <!-- Add Arrows -->
           <div class="swiper-button-next"></div>
@@ -37,6 +36,61 @@
           </div>
         </div>
       </div>
+      <div class="picture-aside">
+        <div class="aside-post">
+          <div class="aside-post-head">
+            <img src="../assets/user.jpg"/>
+            <span style="margin-left: 10px; text-align: left">
+              <div class="name">只为红颜</div>
+              <div class="date">12月3日</div>
+            </span>
+            <div style="display: flex;flex-direction: row;justify-content: flex-end;align-items: center;flex-grow: 1;">
+              <el-button type="primary">关注</el-button>
+            </div>
+          </div>
+          <div class="aside-post-content">
+            <div class="content-title">冰川之上</div>
+            <div class="content-introduce">
+              北起格兰林岛，长期的冰川运动造就了深长的峡湾
+            </div>
+            <div class="content-heart">
+              <span style="cursor: pointer"  v-bind:class="{redColor: isHeart}" @click="heartClick">
+                <i class="fa fa-heart"></i><span class="heart-num" v-bind:class="{redColor: isHeart}">{{ heartNum }}</span></span>
+            </div>
+          </div>
+          <div class="aside-post-comment">
+            <div class="comment-content">
+              <span class="comment-content-img">
+                <img src="../assets/user2.jpeg"/>
+              </span>
+              <el-input
+                type="textarea"
+                :rows="3"
+                placeholder="你的评论是对ta最好的鼓励">
+              </el-input>
+              <div style="text-align: right;padding-right: 10px;margin-top: 10px;">
+                <el-button type="text">发送</el-button>
+              </div>
+            </div>
+            <div class="comment-list" v-for="item in commentList">
+              <div class="comment-list-item">
+                <div class="comment-img">
+                  <img :src="item.img"/>
+                  <span>{{item.name}}</span>
+                </div>
+                <div class="comment-info">
+                  {{item.content}}
+                </div>
+                <div class="comment-date">
+                  {{item.date}}
+                </div>
+                <div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -44,7 +98,19 @@
 
 <script>
   import Swiper from '../../static/swiper.min.js'
+  import ElButton from '../../node_modules/element-ui/packages/button/src/button'
+  import ElForm from '../../node_modules/element-ui/packages/form/src/form'
+  import ElFormItem from '../../node_modules/element-ui/packages/form/src/form-item'
+  import user3 from '../assets/user3.jpg'
+  import user4 from '../assets/user4.jpg'
+  import user5 from '../assets/user5.jpg'
+  import user6 from '../assets/user6.jpg'
+
   export default{
+    components: {
+      ElFormItem,
+      ElForm,
+      ElButton},
     data () {
       return {
         currentDate: new Date(),
@@ -53,7 +119,45 @@
         heartNum: 0,
         dialogVisible: false,
         maskShow: false,
-        pictureContentShow: false
+        pictureContentShow: false,
+        commentList: [
+          {
+            img: user3,
+            name: '浅安时光',
+            content: '这么真实的吗，拍的真的太漂亮了',
+            date: '2017-12-3'
+          },
+          {
+            img: user4,
+            name: '志霸和Jason',
+            content: '哇，是真的牛批',
+            date: '2017-12-3'
+          },
+          {
+            img: user5,
+            name: 'Luminary',
+            content: '拍照这方面还是得给你们整得明明白白的',
+            date: '2017-12-3'
+          },
+          {
+            img: user6,
+            name: '旖旎℉',
+            content: '卧槽，真鸡儿好看',
+            date: '2017-12-3'
+          },
+          {
+            img: user6,
+            name: '旖旎℉',
+            content: '卧槽，真鸡儿好看',
+            date: '2017-12-3'
+          },
+          {
+            img: user6,
+            name: '旖旎℉',
+            content: '卧槽，真鸡儿好看',
+            date: '2017-12-3'
+          }
+        ]
       }
     },
     methods: {
@@ -233,8 +337,14 @@
     color: #e60905;
   }
 
+  .image-dialog .el-dialog{
+    overflow: hidden;
+    height: 700px;
+  }
+
   #picture-display .el-dialog__wrapper{
     padding: 25px 50px 25px 50px;
+    overflow: hidden;
   }
 
   #picture-display .el-dialog__header{
@@ -248,36 +358,8 @@
     right: 320px;
     bottom: 0;
     left: 0;
+    overflow: hidden;
   }
-
-  /*.picture-main .gallery-top{*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*bottom: 110px;*/
-    /*left: 0;*/
-    /*right: 0;*/
-  /*}*/
-
-  /*.picture-main .gallery-thumbs{*/
-    /*position: absolute;*/
-    /*bottom: 0;*/
-    /*height: 110px;*/
-    /*width: 100%;*/
-  /*}*/
-
-  /*.gallery-thumbs {*/
-    /*height: 20%;*/
-    /*box-sizing: border-box;*/
-    /*padding: 10px 0;*/
-  /*}*/
-  /*.gallery-thumbs .swiper-slide {*/
-    /*width: 25%;*/
-    /*height: 100%;*/
-    /*opacity: 0.4;*/
-  /*}*/
-  /*.gallery-thumbs .swiper-slide-active {*/
-    /*opacity: 1;*/
-  /*}*/
 
   .swiper-container {
     width: 100%;
@@ -305,5 +387,127 @@
   }
   .gallery-thumbs .swiper-slide-active {
     opacity: 1;
+  }
+
+  .picture-aside{
+    position: absolute;
+    width: 320px;
+    height: 100%;
+    top: 55px;
+    right: 0;
+    margin-left: auto;
+    overflow: scroll;
+    border-left: 1px solid #10cf7d;
+  }
+
+  .aside-post-head{
+    border-bottom: 1px solid #f0f0f0;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .aside-post-head img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  .aside-post-head .name{
+    font-size: 17px;
+    color: black;
+  }
+
+  .aside-post-head .date{
+    font-size: 14px;
+  }
+
+  .aside-post-content{
+    padding: 15px 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+
+  .aside-post-content .content-introduce{
+    text-align: left;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .content-title{
+    font-weight: 400;
+    font-size: 17px;
+    text-align: left;
+    color: black;
+    line-height: 30px;
+  }
+
+  .content-heart{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .content-heart .heart-num{
+    color: #5a5e66;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+
+  .aside-post-comment{
+    padding: 15px 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .aside-post-comment .comment-content{
+    position: relative;
+    padding-left: 36px;
+  }
+
+  .comment-content-img{
+    position: absolute;
+    left: 0;
+    width: 26px;
+    height: 26px;
+    top: 0;
+  }
+
+  .aside-post-comment img{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .comment-list-item{
+    margin: 5px 0;
+  }
+
+  .comment-img{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .comment-img span{
+    margin-left: 10px;
+    font-size: 16px;
+  }
+
+  .comment-info{
+    margin-left: 36px;
+    text-align: left;
+    font-size: 13px;
+  }
+
+  .comment-date{
+    text-align: right;
+    font-size: 13px;
   }
 </style>
