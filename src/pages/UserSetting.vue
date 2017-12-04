@@ -1,28 +1,24 @@
 <template>
-  <div id="user-center">
+  <div id="user-setting">
     <div style="text-align: center">
-      <div id="user-center-header">
-        <div id="user-center-header-background">
-          <img src="../assets/user.jpg" id="user-center-header-image"/>
+      <div id="user-setting-header">
+        <div id="user-setting-header-background">
+          <img src="../assets/user.jpg" id="user-setting-header-image"/>
         </div>
-        <div id="user-center-header-body">
-          <p id="user-center-header-username">只为红颜</p>
-          <div id="user-center-header-introduce-container">
-            <span v-if="showSignature" id="user-center-header-introduce">{{ signature}}</span>
+        <div id="user-setting-header-body">
+          <p id="user-setting-header-username">只为红颜</p>
+          <div id="user-setting-header-introduce-container">
+            <span v-if="showSignature" id="user-setting-header-introduce">{{ signature}}</span>
             <el-input v-else v-model="signature" id="signature-input" maxlength="40"></el-input>
-            <div id="user-center-header-introduce-button">
+            <div id="user-setting-header-introduce-button">
               <el-button v-if="showSignature" size="medium" @click="showSignature = false; beforeSignature = signature">修改个性签名</el-button>
-              <div v-else>
-                <el-button size="medium" type="success" @click="showSignature = true" style="background-color: #10cf7d;border-color: #10cf7d">保存</el-button>
-                <el-button size="medium" @click="showSignature = true; signature = beforeSignature">取消</el-button>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div style="text-align: center">
-      <div id="user-center-main">
+      <div id="user-setting-main">
         <el-tabs :tab-position="tabPosition" style="margin: 10px">
           <el-tab-pane>
             <span slot="label">个人资料</span>
@@ -68,10 +64,10 @@
 </script>
 
 <style>
-  #user-center{
+  #user-setting{
   }
 
-  #user-center-header{
+  #user-setting-header{
     display: inline-block;
     width: 1000px;
     height: 250px;
@@ -81,7 +77,7 @@
     border-radius: 5px;
   }
 
-  #user-center-header-background{
+  #user-setting-header-background{
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -90,7 +86,7 @@
     border-radius: 5px 5px 0 0;
   }
 
-  #user-center-header-image{
+  #user-setting-header-image{
     width: 160px;
     height: 160px;
     border-radius: 5px;
@@ -98,13 +94,13 @@
     margin: 0 0 -100px 20px;
   }
 
-  #user-center-header-body{
+  #user-setting-header-body{
     margin-top: 15px;
     height: 100px;
     background-color: white;
   }
 
-  #user-center-header-username{
+  #user-setting-header-username{
     margin:0 0 15px 220px;
     font-size: 25px;
     font-weight: normal;
@@ -112,20 +108,20 @@
     text-align: left;
   }
 
-  #user-center-header-introduce-container{
+  #user-setting-header-introduce-container{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
   }
 
-  #user-center-header-introduce{
+  #user-setting-header-introduce{
     margin-left: 220px;
     font-size: 15px;
     color: #858585;
   }
 
-  #user-center-header-introduce-button{
+  #user-setting-header-introduce-button{
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -144,7 +140,7 @@
     width: 500px;
   }
 
-  #user-center-main{
+  #user-setting-main{
     display: inline-block;
     width: 1000px;
     background-color: white;
@@ -153,11 +149,11 @@
     box-shadow: 0 0 5px #d2d2d2;
   }
 
-  #user-center-main .el-tabs__item{
+  #user-setting-main .el-tabs__item{
     font-size: 17px;
   }
 
-  #user-center-main .el-tabs__header{
+  #user-setting-main .el-tabs__header{
     margin-top: 30px;
   }
 

@@ -16,8 +16,8 @@
             <img id="head-portrait" src="./assets/user.jpg"/>
           </span>
             <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="d">我的掠影</el-dropdown-item>
               <el-dropdown-item command="a">账号设置</el-dropdown-item>
-              <el-dropdown-item command="b">我的关注</el-dropdown-item>
               <el-dropdown-item command="c">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -34,8 +34,11 @@
 
 <script>
   import ElButton from './../node_modules/element-ui/packages/button/src/button'
+  import ElDropdownItem from '../node_modules/element-ui/packages/dropdown/src/dropdown-item'
   export default {
-    components: {ElButton},
+    components: {
+      ElDropdownItem,
+      ElButton},
     name: 'app',
     data () {
       return {
@@ -49,8 +52,8 @@
       handleCommand (command) {
         if (command === 'a') {
           this.$router.push({name: 'UserSetting', params: {userId: '0001'}})
-        } else if (command === 'b') {
-          this.$router.push()
+        } else if (command === 'd') {
+          this.$router.push({name: 'UserCenter', params: {userId: '0001'}})
         } else if (command === 'c') {
           this.isLogin = true
           this.$router.push({name: 'Main'})
