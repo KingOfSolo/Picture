@@ -6,8 +6,14 @@
           <span style="margin: 0 0 -100px 20px">
             <img src="../assets/user.jpg" id="user-center-header-image"/>
             <div class="user-center-header-follow-container">
-              <span class="follow">粉丝</span>
-              <span class="fans">关注</span>
+              <div class="fans">
+                <div class="fans-num">100</div>
+                <div style="font-size: 13px;">粉丝</div>
+              </div>
+              <div class="follow">
+                <span class="follow-num">10</span>
+                <div style="font-size: 13px;">关注</div>
+              </div>
             </div>
           </span>
         </div>
@@ -25,14 +31,28 @@
           </div>
         </div>
       </div>
+      <div id="user-center-main">
+        <el-tabs type="border-card">
+          <el-tab-pane label="图片作品">
+            <user-center-picture></user-center-picture>
+          </el-tab-pane>
+          <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+          <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+        </el-tabs>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import ElButton from '../../node_modules/element-ui/packages/button/src/button'
+  import UserCenterPicture from '../components/userCenterPicture.vue'
   export default{
-    components: {ElButton},
+    components: {
+      ElButton,
+      UserCenterPicture
+    },
     data () {
       return {
         signature: '你是一只修行千年的狐 我是一介书生独醉江湖'
@@ -48,7 +68,7 @@
     height: 250px;
     background-color: white;
     box-shadow: 0 0 5px #d2d2d2;
-    margin-top: 10px;
+    margin: 10px 0 10px 0;
     border-radius: 5px;
   }
 
@@ -111,13 +131,41 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 10px;
   }
 
-  .user-center-header-follow-container .follow{
+  .user-center-header-follow-container .follow, .fans{
     width: 80px;
-    background-color: #E7FAF2;
+    /*background-color: #E7FAF2;*/
+    display: inline-block;
+    cursor: pointer;
+    color: #222222;
   }
+
+  .user-center-header-follow-container .follow-num, .fans-num{
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+  .user-center-header-follow-container .follow:hover, .fans:hover{
+    color: #10cf7d;
+  }
+
+  #user-center-main{
+    width: 1200px;
+    display: inline-block;
+  }
+
+  #user-center-main .el-tabs{
+    box-shadow: 0 0 5px #d2d2d2;
+    border-radius: 5px;
+  }
+
+  /*.user-center-header-follow-container .fans{*/
+    /*width: 80px;*/
+    /*!*background-color: #E7FAF2;*!*/
+    /*display: inline-block;*/
+    /*cursor: pointer;*/
+  /*}*/
 
 
 </style>

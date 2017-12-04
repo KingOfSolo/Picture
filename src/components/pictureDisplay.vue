@@ -241,6 +241,7 @@
     height: 100%;
     display: block;
     cursor:pointer;
+    object-fit: cover;
     background-color: rgb(160, 161, 154);
     background-size: cover;
     background-position: center;
