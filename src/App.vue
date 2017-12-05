@@ -8,7 +8,7 @@
         </div>
         <div v-if="isLogin">
           <el-button type="text" class="header-button" @click="isLogin = false">登录</el-button>
-          <el-button type="text" class="header-button" >注册</el-button>
+          <el-button type="text" class="header-button" @click="loginDialogVisible = true">注册</el-button>
         </div>
         <div v-else>
           <el-dropdown style="margin-left: 10px" @command="handleCommand">
@@ -29,23 +29,32 @@
         <router-view></router-view>
       </transition>
     </div>
+    <el-dialog
+      :visible.sync="loginDialogVisible"
+      width="30%">
+      <login></login>
+    </el-dialog>
   </div>
 </template>
 
 <script>
   import ElButton from './../node_modules/element-ui/packages/button/src/button'
   import ElDropdownItem from '../node_modules/element-ui/packages/dropdown/src/dropdown-item'
+  import Login from './components/logIn.vue'
   export default {
     components: {
       ElDropdownItem,
-      ElButton},
+      ElButton,
+      Login},
     name: 'app',
     data () {
       return {
         msg: 'Welcome to Your Vue.js App',
         value1: '',
         color: 'white',
-        isLogin: true
+        isLogin: true,
+        loginDialogVisible: false,
+        showClose: false
       }
     },
     methods: {
