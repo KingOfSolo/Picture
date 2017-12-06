@@ -31,7 +31,7 @@
     </div>
     <el-dialog
       :visible.sync="loginDialogVisible"
-      width="30%">
+      width="750px">
       <login></login>
     </el-dialog>
   </div>
