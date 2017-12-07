@@ -5,12 +5,12 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'
 import './theme.css'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 Vue.config.productionTip = false
 
 Vue.use(Element)
-Vue.use($)
+// Vue.use($)
 
 /* eslint-disable no-new */
 new Vue({
