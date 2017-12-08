@@ -22,19 +22,23 @@
       <div class="picture-main">
         <div class="swiper-container gallery-top">
           <div class="swiper-wrapper">
-            <!--<div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>-->
+            <div class="swiper-slide">
+              <img src="https://picsum.photos/800/600"/>
+            </div>
           </div>
           <!-- Add Arrows -->
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
 
-        <div class="swiper-container gallery-thumbs">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide swiper-slide-active" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851908612&di=4f6802ca072e04fc08d442c97fdc7f39&imgtype=0&src=http%3A%2F%2Fimg.juimg.com%2Ftuku%2Fyulantu%2F140313%2F330457-14031320362254.jpg)"></div>
-            <div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>
-          </div>
-        </div>
+        <!--<div class="swiper-container gallery-thumbs">-->
+          <!--<div class="swiper-wrapper">-->
+            <!--<div class="swiper-slide swiper-slide-active">-->
+              <!--<img src="https://picsum.photos/300/150"/>-->
+            <!--</div>-->
+            <!--<div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
       <div class="picture-aside">
         <div class="aside-post">
@@ -206,6 +210,10 @@
 <style>
   @import "../style/font-awesome-4.7.0/css/font-awesome.min.css";
   @import "../../static/swiper.min.css";
+
+  /*img{*/
+    /*object-fit: cover;*/
+  /*}*/
 
   #picture-display{
     height: 381px;

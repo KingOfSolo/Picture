@@ -16,3 +16,5 @@ src/theme.css
 src/theme.css.map
 static/swiper.min.css
 static/swiper.min.js
+database/database.db
+debug.log
