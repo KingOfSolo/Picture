@@ -36,7 +36,9 @@
           <el-tab-pane label="图片作品">
             <user-center-picture></user-center-picture>
           </el-tab-pane>
-          <el-tab-pane label="相册作品">配置管理</el-tab-pane>
+          <el-tab-pane label="相册作品">
+            <user-center-album></user-center-album>
+          </el-tab-pane>
           <el-tab-pane label="关注">
             <user-center-follow></user-center-follow>
           </el-tab-pane>
@@ -54,12 +56,14 @@
   import UserCenterPicture from '../components/UserCenter/userCenterPicture.vue'
   import UserCenterFollow from '../components/UserCenter/userCenterFollow.vue'
   import UserCenterFans from '../components/UserCenter/userCenterFans.vue'
+  import UserCenterAlbum from '../components/UserCenter/userCenterAlbum.vue'
   export default{
     components: {
       ElButton,
       UserCenterPicture,
       UserCenterFollow,
-      UserCenterFans
+      UserCenterFans,
+      UserCenterAlbum
     },
     data () {
       return {

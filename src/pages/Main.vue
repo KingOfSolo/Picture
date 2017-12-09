@@ -4,7 +4,13 @@
         <div id="banner-title">
           掠影
         </div>
-        <input id="banner-input"/>
+        <div style="text-align: center;margin-top: 20px">
+          <div style="width: 600px;display: inline-block">
+            <el-input placeholder="请输入内容" class="input-with-select">
+              <el-button slot="append" icon="el-icon-search"></el-button>
+            </el-input>
+          </div>
+        </div>
     </div>
     <div style="text-align: center">
       <div class="masonry">
@@ -227,7 +233,8 @@
   .banner{
     text-align: center;
     height: 500px;
-    background-color: #10cf7d;
+    background-image: url("https://picsum.photos/1700/614/?random");
+    /*background-color: #10cf7d;*/
   }
 
   #banner-title{
