@@ -1,51 +1,36 @@
 <template>
   <div id="picture-display">
-    <div class="post-item">
-      <div class="post-body" v-on:mouseenter="imageMaskEnter" v-on:mouseleave="imageMaskLeave">
-        <img src="../assets/picture.jpg" class="image"/>
+    <!--<div class="post-item">-->
+      <div style="position: relative" v-on:mouseenter="imageMaskEnter" v-on:mouseleave="imageMaskLeave">
+        <img :src="imgUrl" class="image"/>
         <div class="image-mask" v-bind:class="{maskOpacity: maskShow}" @click="showDialog"></div>
         <div id="picture-display-bottom" v-if="pictureContentShow">
-          <img src="../assets/user.jpg"/>
-          <span style="cursor: pointer">只为红颜</span>
+          <img :src="userHead"/>
+          <span style="cursor: pointer">{{ username }}</span>
           <div id="picture-display-button">
-          <span class="picture-icon" style="padding-right: 10px" v-bind:class="{redColor: isHeart}" @click="heartClick">
-            <i class="fa fa-heart"></i><span class="picture-icon-num">{{ heartNum }}</span></span>
-            <span class="picture-icon"><i class="fa fa-comments"></i><span class="picture-icon-num">0</span></span>
+                <span class="picture-icon" style="padding-right: 10px" v-bind:class="{redColor: isHeart}" @click="heartClick">
+                  <i class="fa fa-heart"></i>
+                  <span class="picture-icon-num">{{ heartNum }}
+                  </span>
+                </span>
+            <span class="picture-icon"><i class="fa fa-comments"></i><span class="picture-icon-num">{{ commentNum }}</span></span>
           </div>
         </div>
       </div>
-    </div>
+    <!--</div>-->
     <div>
 
     </div>
     <el-dialog :visible.sync="dialogVisible" class="image-dialog" fullscreen>
       <div class="picture-main">
-        <div class="swiper-container gallery-top">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://picsum.photos/800/600"/>
-            </div>
-          </div>
-          <!-- Add Arrows -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-
-        <!--<div class="swiper-container gallery-thumbs">-->
-          <!--<div class="swiper-wrapper">-->
-            <!--<div class="swiper-slide swiper-slide-active">-->
-              <!--<img src="https://picsum.photos/300/150"/>-->
-            <!--</div>-->
-            <!--<div class="swiper-slide" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510851972954&di=7b4dbe74de1d4ffe1e1f18fbabafe28b&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Fa1%2F14%2Fd%2F23.jpg)"></div>-->
-          <!--</div>-->
-        <!--</div>-->
+        <img :src="imgUrl"/>
       </div>
       <div class="picture-aside">
         <div class="aside-post">
           <div class="aside-post-head">
-            <img src="../assets/user.jpg"/>
+            <img :src="userHead"/>
             <span style="margin-left: 10px; text-align: left">
-              <div class="name">只为红颜</div>
+              <div class="name">{{ username }}</div>
               <div class="date">12月3日</div>
             </span>
             <div style="display: flex;flex-direction: row;justify-content: flex-end;align-items: center;flex-grow: 1;">
@@ -115,6 +100,7 @@
       ElFormItem,
       ElForm,
       ElButton},
+    props: ['imgUrl', 'userHead', 'username', 'heartNum', 'commentNum'],
     data () {
       return {
         currentDate: new Date(),
@@ -216,23 +202,21 @@
   /*}*/
 
   #picture-display{
-    height: 381px;
-    width: 450px;
+    height: 100%;
+    width: 100%;
     display: inline-block;
-    padding: 7px;
     position: relative;
     vertical-align: top;
-    padding: 5px 5px 6px;
     margin-left: 0px;
     margin-bottom: 0px;
   }
 
   .post-item{
     position: absolute;
-    left: 5px;
-    right: 5px;
-    top: 5px;
-    bottom: 5px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
     background-color: #ffffff;
   }
 
@@ -363,11 +347,14 @@
 
   .picture-main{
     position: absolute;
-    top: 55px;
+    top: 0px;
     right: 320px;
     bottom: 0;
     left: 0;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .swiper-container {
@@ -381,7 +368,7 @@
     background-position: center;
   }
   .gallery-top {
-    height: 80%;
+    height: 90%;
     width: 100%;
   }
   .gallery-thumbs {
