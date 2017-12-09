@@ -56,7 +56,7 @@
 </script>
 
 <style>
-  @import "../style/scss/login.css";
+  @import "../../style/scss/login.css";
 
   .transformSignUp{
     transform: translateX(0);

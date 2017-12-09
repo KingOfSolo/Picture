@@ -1,22 +1,26 @@
 <template>
   <div id="picture-display">
     <!--<div class="post-item">-->
-      <div style="position: relative" v-on:mouseenter="imageMaskEnter" v-on:mouseleave="imageMaskLeave">
-        <img :src="imgUrl" class="image"/>
-        <div class="image-mask" v-bind:class="{maskOpacity: maskShow}" @click="showDialog"></div>
-        <div id="picture-display-bottom" v-if="pictureContentShow">
-          <img :src="userHead"/>
-          <span style="cursor: pointer">{{ username }}</span>
-          <div id="picture-display-button">
+    <div style="position: relative" v-on:mouseenter="imageMaskEnter" v-on:mouseleave="imageMaskLeave">
+      <img :src="imgUrl" class="image"/>
+      <div class="image-mask" v-bind:class="{maskOpacity: maskShow}" @click="showDialog"></div>
+      <div class="picture-display-title" v-if="pictureContentShow">
+        <div style="text-align: left;font-size: 16px;color: white;margin-bottom: 15px">{{imgTitle}}</div>
+        <div style="text-align: left;font-size: 12px;color: white">by {{username}}</div>
+      </div>
+      <div id="picture-display-bottom" v-if="pictureContentShow">
+        <!--<img :src="userHead"/>-->
+        <!--<span style="cursor: pointer">{{ username }}</span>-->
+        <div id="picture-display-button">
                 <span class="picture-icon" style="padding-right: 10px" v-bind:class="{redColor: isHeart}" @click="heartClick">
                   <i class="fa fa-heart"></i>
                   <span class="picture-icon-num">{{ heartNum }}
                   </span>
                 </span>
-            <span class="picture-icon"><i class="fa fa-comments"></i><span class="picture-icon-num">{{ commentNum }}</span></span>
-          </div>
+          <span class="picture-icon"><i class="fa fa-comments"></i><span class="picture-icon-num">{{ commentNum }}</span></span>
         </div>
       </div>
+    </div>
     <!--</div>-->
     <div>
 
@@ -50,7 +54,7 @@
           <div class="aside-post-comment">
             <div class="comment-content">
               <span class="comment-content-img">
-                <img src="../assets/user2.jpeg"/>
+                <img src="../../assets/user2.jpeg"/>
               </span>
               <el-input
                 type="textarea"
@@ -86,27 +90,26 @@
 
 
 <script>
-  import Swiper from '../../static/swiper.min.js'
-  import ElButton from '../../node_modules/element-ui/packages/button/src/button'
-  import ElForm from '../../node_modules/element-ui/packages/form/src/form'
-  import ElFormItem from '../../node_modules/element-ui/packages/form/src/form-item'
-  import user3 from '../assets/user3.jpg'
-  import user4 from '../assets/user4.jpg'
-  import user5 from '../assets/user5.jpg'
-  import user6 from '../assets/user6.jpg'
+  import Swiper from '../../../static/swiper.min.js'
+  import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
+  import ElForm from '../../../node_modules/element-ui/packages/form/src/form'
+  import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item'
+  import user3 from '../../assets/user3.jpg'
+  import user4 from '../../assets/user4.jpg'
+  import user5 from '../../assets/user5.jpg'
+  import user6 from '../../assets/user6.jpg'
 
   export default{
     components: {
       ElFormItem,
       ElForm,
       ElButton},
-    props: ['imgUrl', 'userHead', 'username', 'heartNum', 'commentNum'],
+    props: ['imgUrl', 'userHead', 'username', 'imgTitle', 'heartNum', 'commentNum'],
     data () {
       return {
         currentDate: new Date(),
         showMask: false,
         isHeart: false,
-        heartNum: 0,
         dialogVisible: false,
         maskShow: false,
         pictureContentShow: false,
@@ -194,11 +197,11 @@
 </script>
 
 <style>
-  @import "../style/font-awesome-4.7.0/css/font-awesome.min.css";
-  @import "../../static/swiper.min.css";
+  @import "../../style/font-awesome-4.7.0/css/font-awesome.min.css";
+  @import "../../../static/swiper.min.css";
 
   /*img{*/
-    /*object-fit: cover;*/
+  /*object-fit: cover;*/
   /*}*/
 
   #picture-display{
@@ -262,8 +265,14 @@
   }
 
   /*.image-mask:hover{*/
-    /*opacity: 0.5;*/
+  /*opacity: 0.5;*/
   /*}*/
+
+  .picture-display-title{
+    position: absolute;
+    top: 20px;
+    left: 15px;
+  }
 
   #picture-display-bottom{
     position: absolute;
@@ -281,8 +290,8 @@
   }
 
   /*#picture-display .button {*/
-    /*padding: 0;*/
-    /*float: right;*/
+  /*padding: 0;*/
+  /*float: right;*/
   /*}*/
 
   .image {

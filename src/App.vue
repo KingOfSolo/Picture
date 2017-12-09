@@ -40,7 +40,7 @@
 <script>
   import ElButton from './../node_modules/element-ui/packages/button/src/button'
   import ElDropdownItem from '../node_modules/element-ui/packages/dropdown/src/dropdown-item'
-  import Login from './components/logIn.vue'
+  import Login from './components/HomePage/logIn.vue'
   export default {
     components: {
       ElDropdownItem,

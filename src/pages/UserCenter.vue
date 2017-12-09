@@ -10,7 +10,7 @@
                 <div class="fans-num">100</div>
                 <div style="font-size: 13px;">粉丝</div>
               </div>
-              <div class="follow">
+              <div class="follow" @click="followClick">
                 <span class="follow-num">10</span>
                 <div style="font-size: 13px;">关注</div>
               </div>
@@ -36,9 +36,13 @@
           <el-tab-pane label="图片作品">
             <user-center-picture></user-center-picture>
           </el-tab-pane>
-          <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-          <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-          <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+          <el-tab-pane label="相册作品">配置管理</el-tab-pane>
+          <el-tab-pane label="关注">
+            <user-center-follow></user-center-follow>
+          </el-tab-pane>
+          <el-tab-pane label="粉丝">
+            <user-center-fans></user-center-fans>
+          </el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -47,15 +51,24 @@
 
 <script>
   import ElButton from '../../node_modules/element-ui/packages/button/src/button'
-  import UserCenterPicture from '../components/userCenterPicture.vue'
+  import UserCenterPicture from '../components/UserCenter/userCenterPicture.vue'
+  import UserCenterFollow from '../components/UserCenter/userCenterFollow.vue'
+  import UserCenterFans from '../components/UserCenter/userCenterFans.vue'
   export default{
     components: {
       ElButton,
-      UserCenterPicture
+      UserCenterPicture,
+      UserCenterFollow,
+      UserCenterFans
     },
     data () {
       return {
         signature: '你是一只修行千年的狐 我是一介书生独醉江湖'
+      }
+    },
+    methods: {
+      followClick: function () {
+
       }
     }
   }
@@ -153,6 +166,7 @@
   #user-center-main{
     width: 1200px;
     display: inline-block;
+    margin-bottom: 10px;
   }
 
   #user-center-main .el-tabs{

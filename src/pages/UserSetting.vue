@@ -43,7 +43,7 @@
 <script>
   import ElButton from '../../node_modules/element-ui/packages/button/src/button'
   import ElInput from '../../node_modules/element-ui/packages/input/src/input'
-  import UserInfo from '../components/userInfo.vue'
+  import UserInfo from '../components/UserSetting/userInfo.vue'
   export default{
     components: {
       ElInput,

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import pictureDisplay from '../components/pictureDisplay.vue'
+  import pictureDisplay from '../components/HomePage/pictureDisplay.vue'
   import Swiper from '../../static/swiper.min.js'
   import user3 from '../assets/user3.jpg'
   import user4 from '../assets/user4.jpg'

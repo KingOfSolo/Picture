@@ -40,7 +40,7 @@
     <form class="user-info-form" @mouseenter="formEnter(2)" @mouseleave="formLeave(2)">
       <h3 class="form-label">头像</h3>
       <div class="form-content">
-        <img style="width: 45px;height: 45px;margin-right: 15px" src="../assets/user.jpg"/>
+        <img style="width: 45px;height: 45px;margin-right: 15px" src="../../assets/user.jpg"/>
         <el-button type="text" icon="el-icon-edit" v-bind:class="{ editHidden: showEdit.show2 }">修改</el-button>
       </div>
     </form>
@@ -117,11 +117,11 @@
 
 
 <script>
-  import ElForm from '../../node_modules/element-ui/packages/form/src/form'
-  import ElFormItem from '../../node_modules/element-ui/packages/form/src/form-item'
-  import ElButton from '../../node_modules/element-ui/packages/button/src/button'
-  import EditButton from './editButton.vue'
-  import ElInput from '../../node_modules/element-ui/packages/input/src/input'
+  import ElForm from '../../../node_modules/element-ui/packages/form/src/form'
+  import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item'
+  import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
+  import EditButton from '../editButton.vue'
+  import ElInput from '../../../node_modules/element-ui/packages/input/src/input'
 
   export default{
     components: {
