@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser')
 
 // var index = require('./server/api/index');
 var user = require('./server/api/user')
+var login = require('./server/api/login')
 
 var app = express()
 
@@ -13,7 +14,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(cookieParser())
 // app.use('/',index);
-app.use('/user',user)
+app.use('/user', user)
+app.use('/login', login)
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

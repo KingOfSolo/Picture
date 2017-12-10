@@ -15,7 +15,7 @@ console.log('hahhahah')
  */
 var query = function (sql, param, callback) {
   callback = callback || param
-  var sqlite3Connect = new sqlite3.Database('../database/database.db')
+  var sqlite3Connect = new sqlite3.Database('./database/database.db')
   sqlite3Connect.all(sql, param, function (err, result) {
     callback(err, result)
     sqlite3Connect.close()
@@ -25,14 +25,14 @@ var query = function (sql, param, callback) {
 exports.query = query
 exports.insert = function (sql, param, callback) {
   callback = callback || param
-  var sqlite3Connect = new sqlite3.Database('../database/database.db')
+  var sqlite3Connect = new sqlite3.Database('./database/database.db')
   sqlite3Connect.run(sql, param, function (err) {
     callback(err, this)
     sqlite3Connect.close()
   })
 }
 exports.multiInsert = function (sql, params, callback) {
-  var sqlite3Connect = new sqlite3.Database('../database/database.db')
+  var sqlite3Connect = new sqlite3.Database('./database/database.db')
   sqlite3Connect.run('BEGIN TRANSACTION')
   for (var i = 0; i < params.length; i += 1) {
     sqlite3Connect.run(sql, params[i])
@@ -51,7 +51,7 @@ exports.checkToken = function (token, callback) {
   var sql = '' +
     'SELECT userId FROM login WHERE token=?'
   var param = [token]
-  var sqlite3Connect = new sqlite3.Database('./database/pixelice.db')
+  var sqlite3Connect = new sqlite3.Database('./database/database.db')
   sqlite3Connect.all(sql, param, function (err, result) {
     callback(err, result)
     sqlite3Connect.close()

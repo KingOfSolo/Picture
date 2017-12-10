@@ -32,7 +32,7 @@
     <el-dialog
       :visible.sync="loginDialogVisible"
       width="750px">
-      <login></login>
+      <login v-on:signUpSuccess="loginSuccess"></login>
     </el-dialog>
   </div>
 </template>
@@ -63,13 +63,12 @@
         this.$http({
           method: 'post',
           dataType: 'JSONP',
-          url: '/user/UserInfo',
+          url: '/login/signIn',
           data: {
             username: 'test',
             password: '123456'
           }
         }).then(function (res) {
-          alert(res.data.data)
         }).catch(function (err) {
           alert(err)
         })
@@ -83,6 +82,11 @@
           this.isLogin = true
           this.$router.push({name: 'Main'})
         }
+      },
+      loginSuccess (token) {
+        this.loginDialogVisible = false
+        this.isLogin = true
+        alert(token)
       }
     }
   }
