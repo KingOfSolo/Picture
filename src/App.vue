@@ -7,7 +7,7 @@
           <el-input id="search" placeholder="请输入内容"><img slot="suffix" class="el-input__icon" src="./assets/search.svg"></el-input>
         </div>
         <div v-if="isLogin">
-          <el-button type="text" class="header-button" @click="isLogin = false">登录</el-button>
+          <el-button type="text" class="header-button" @click="login">登录</el-button>
           <el-button type="text" class="header-button" @click="loginDialogVisible = true">注册</el-button>
         </div>
         <div v-else>
@@ -58,6 +58,22 @@
       }
     },
     methods: {
+      login: function () {
+        this.isLogin = false
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/user/UserInfo',
+          data: {
+            username: 'test',
+            password: '123456'
+          }
+        }).then(function (res) {
+          alert(res.data.data)
+        }).catch(function (err) {
+          alert(err)
+        })
+      },
       handleCommand (command) {
         if (command === 'a') {
           this.$router.push({name: 'UserSetting', params: {userId: '0001'}})

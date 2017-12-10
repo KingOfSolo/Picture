@@ -11,6 +11,10 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
     "element-ui": "^2.0.3",
     "express": "^4.16.2",
     "jquery": "^3.2.1",

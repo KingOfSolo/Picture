@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'
 import './theme.css'
+import axiosService from '../axiosService'
 // import $ from 'jquery'
 
 Vue.config.productionTip = false
+Vue.prototype.$http = axiosService
 
 Vue.use(Element)
 // Vue.use($)
