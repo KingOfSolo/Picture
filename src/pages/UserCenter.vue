@@ -4,14 +4,14 @@
       <div id="user-center-header">
         <div id="user-center-header-background">
           <span style="margin: 0 0 -100px 20px">
-            <img src="../assets/user.jpg" id="user-center-header-image"/>
+            <img :src="userInfo.headUrl" id="user-center-header-image"/>
             <div class="user-center-header-follow-container">
               <div class="fans">
-                <div class="fans-num">100</div>
+                <div class="fans-num">{{userInfo.fans}}</div>
                 <div style="font-size: 13px;">粉丝</div>
               </div>
               <div class="follow" @click="followClick">
-                <span class="follow-num">10</span>
+                <span class="follow-num">{{userInfo.follows}}</span>
                 <div style="font-size: 13px;">关注</div>
               </div>
             </div>
@@ -19,12 +19,12 @@
         </div>
         <div id="user-center-header-body">
           <div class="user-center-header-name-container">
-            <span id="user-center-header-username">只为红颜</span>
+            <span id="user-center-header-username">{{userInfo.nickName}}</span>
             <el-button size="medium">关注</el-button>
             <!--<button class="follow-button">关注</button>-->
           </div>
           <div id="user-center-header-introduce-container">
-            <span id="user-center-header-introduce">{{ signature }}</span>
+            <span id="user-center-header-introduce">{{ userInfo.intro }}</span>
             <div id="user-center-header-introduce-button">
               <el-button size="medium">修改个人资料</el-button>
             </div>
@@ -34,7 +34,7 @@
       <div id="user-center-main">
         <el-tabs type="border-card">
           <el-tab-pane label="图片作品">
-            <user-center-picture></user-center-picture>
+            <user-center-picture :photo-list="photoList" :user-head="userInfo.headUrl" :nick-name="userInfo.nickName"></user-center-picture>
           </el-tab-pane>
           <el-tab-pane label="相册作品">
             <user-center-album></user-center-album>
@@ -67,13 +67,48 @@
     },
     data () {
       return {
-        signature: '你是一只修行千年的狐 我是一介书生独醉江湖'
+        userInfo: {
+        },
+        photoList: {
+        }
       }
     },
     methods: {
       followClick: function () {
-
       }
+    },
+    mounted () {
+      var userId = this.$route.params.userId
+      userId = parseInt(userId)
+      var self = this
+      this.$http({
+        method: 'post',
+        dataType: 'JSONP',
+        url: '/user/getUserInfoById',
+        data: {
+          id: userId
+        }
+      }).then(function (res) {
+        console.log(res)
+        var data = res.data.data
+        self.userInfo = data
+      }).catch(function (err) {
+        alert(err)
+      })
+      this.$http({
+        method: 'post',
+        dataType: 'JSONP',
+        url: '/photo/getPhotosByUserId',
+        data: {
+          id: userId
+        }
+      }).then(function (res) {
+        var data = res.data.data
+        self.photoList = data
+        console.log(self.photoList)
+      }).catch(function (err) {
+        alert(err)
+      })
     }
   }
 </script>
@@ -104,6 +139,7 @@
     border-radius: 5px;
     border: 5px solid white;
     border-bottom-width: 0;
+    object-fit: cover;
   }
 
   #user-center-header-body{

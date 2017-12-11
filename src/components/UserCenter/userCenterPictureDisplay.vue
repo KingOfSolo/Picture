@@ -35,16 +35,16 @@
             <img :src="userHead"/>
             <span style="margin-left: 10px; text-align: left">
               <div class="name">{{ username }}</div>
-              <div class="date">12月3日</div>
+              <div class="date">{{ date }}</div>
             </span>
             <div style="display: flex;flex-direction: row;justify-content: flex-end;align-items: center;flex-grow: 1;">
               <el-button type="primary">关注</el-button>
             </div>
           </div>
           <div class="aside-post-content">
-            <div class="content-title">冰川之上</div>
+            <div class="content-title">{{imgTitle}}</div>
             <div class="content-introduce">
-              北起格兰林岛，长期的冰川运动造就了深长的峡湾
+              {{intro}}
             </div>
             <div class="content-heart">
               <span style="cursor: pointer"  v-bind:class="{redColor: isHeart}" @click="heartClick">
@@ -104,7 +104,7 @@
       ElFormItem,
       ElForm,
       ElButton},
-    props: ['imgUrl', 'userHead', 'username', 'imgTitle', 'heartNum', 'commentNum'],
+    props: ['imgUrl', 'userHead', 'username', 'imgTitle', 'heartNum', 'commentNum', 'date', 'intro'],
     data () {
       return {
         currentDate: new Date(),

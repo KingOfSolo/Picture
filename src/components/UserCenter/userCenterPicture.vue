@@ -11,9 +11,9 @@
           </div>
         </div>
       </div>
-      <div v-for='item in userCenterImageList' class="item">
-        <user-center-picture-display :img-url="item.imgUrl" :user-head="item.userHead" :username="item.username" :img-title="item.imgTitle"
-          :heart-num="item.heartNum" :comment-num="item.commentNum"></user-center-picture-display>
+      <div v-for='item in photoList' class="item">
+        <user-center-picture-display :img-url="item.photoUrl" :user-head="userHead" :username="nickName" :img-title="item.title"
+          :heart-num="item.liked" :comment-num="item.commentNum" :date="item.date" :intro="item.intro"></user-center-picture-display>
       </div>
     </div>
     <el-dialog
@@ -72,6 +72,7 @@
   import user from '../../assets/user.jpg'
 //  import ElUpload from '../../node_modules/element-ui/packages/upload/src/'
   export default{
+    props: ['photoList', 'userHead', 'nickName'],
     components: {
 //      ElUpload,
       ElButton,

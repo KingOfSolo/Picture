@@ -13,7 +13,7 @@
         <div v-else>
           <el-dropdown style="margin-left: 10px" @command="handleCommand">
           <span class="el-dropdown-link">
-            <img id="head-portrait" src="./assets/user.jpg"/>
+            <img id="head-portrait" :src="headUrl"/>
           </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="d">我的掠影</el-dropdown-item>
@@ -47,6 +47,9 @@
       ElButton,
       Login},
     name: 'app',
+    created: function () {
+      this.checkCookie()
+    },
     data () {
       return {
         msg: 'Welcome to Your Vue.js App',
@@ -54,7 +57,8 @@
         color: 'white',
         isLogin: true,
         loginDialogVisible: false,
-        showClose: false
+        showClose: false,
+        headUrl: ''
       }
     },
     methods: {
@@ -77,16 +81,58 @@
         if (command === 'a') {
           this.$router.push({name: 'UserSetting', params: {userId: '0001'}})
         } else if (command === 'd') {
-          this.$router.push({name: 'UserCenter', params: {userId: '0001'}})
+          var loginId = this.$cookie.get('loginId') + ''
+          this.$router.push({name: 'UserCenter', params: {userId: loginId}})
         } else if (command === 'c') {
           this.isLogin = true
           this.$router.push({name: 'Main'})
+          this.$cookie.delete('token')
+          this.$cookie.delete('loginId')
         }
       },
-      loginSuccess (token) {
+      loginSuccess (token, state) {
         this.loginDialogVisible = false
-        this.isLogin = true
-        alert(token)
+        this.isLogin = false
+        console.log(token)
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/user/UserInfo',
+          data: {
+            token: token
+          }
+        }).then(function (res) {
+          console.log(res)
+          var data = res.data.data
+          self.headUrl = data.headUrl
+          self.$cookie.set('token', token)
+          self.$cookie.set('loginId', data.id)
+        }).catch(function (err) {
+          alert(err)
+        })
+      },
+      checkCookie () {
+        var token = this.$cookie.get('token')
+        if (token !== '' && token !== null) {
+          var self = this
+          this.$http({
+            method: 'post',
+            dataType: 'JSONP',
+            url: '/user/UserInfo',
+            data: {
+              token: token
+            }
+          }).then(function (res) {
+            var data = res.data.data
+            self.headUrl = data.headUrl
+            self.loginDialogVisible = false
+            self.isLogin = false
+          }).catch(function (err) {
+            alert(err)
+          })
+        } else {
+        }
       }
     }
   }

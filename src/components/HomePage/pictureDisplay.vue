@@ -31,16 +31,16 @@
             <img :src="userHead"/>
             <span style="margin-left: 10px; text-align: left">
               <div class="name">{{ username }}</div>
-              <div class="date">12月3日</div>
+              <div class="date">{{ date }}</div>
             </span>
             <div style="display: flex;flex-direction: row;justify-content: flex-end;align-items: center;flex-grow: 1;">
               <el-button type="primary">关注</el-button>
             </div>
           </div>
           <div class="aside-post-content">
-            <div class="content-title">冰川之上</div>
+            <div class="content-title">{{ title }}</div>
             <div class="content-introduce">
-              北起格兰林岛，长期的冰川运动造就了深长的峡湾
+              {{ intro }}
             </div>
             <div class="content-heart">
               <span style="cursor: pointer"  v-bind:class="{redColor: isHeart}" @click="heartClick">
@@ -50,22 +50,23 @@
           <div class="aside-post-comment">
             <div class="comment-content">
               <span class="comment-content-img">
-                <img src="../../assets/user2.jpeg"/>
+                <img :src="loginUserHeadUrl"/>
               </span>
               <el-input
                 type="textarea"
                 :rows="3"
-                placeholder="你的评论是对ta最好的鼓励">
+                placeholder="你的评论是对ta最好的鼓励"
+                v-model="commentContent">
               </el-input>
               <div style="text-align: right;padding-right: 10px;margin-top: 10px;">
-                <el-button type="text">发送</el-button>
+                <el-button type="text" @click="sendComment">发送</el-button>
               </div>
             </div>
             <div class="comment-list" v-for="item in commentList">
               <div class="comment-list-item">
                 <div class="comment-img">
-                  <img :src="item.img"/>
-                  <span>{{item.name}}</span>
+                  <img :src="item.headUrl"/>
+                  <span>{{item.nickName}}</span>
                 </div>
                 <div class="comment-info">
                   {{item.content}}
@@ -86,7 +87,6 @@
 
 
 <script>
-  import Swiper from '../../../static/swiper.min.js'
   import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
   import ElForm from '../../../node_modules/element-ui/packages/form/src/form'
   import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item'
@@ -100,7 +100,7 @@
       ElFormItem,
       ElForm,
       ElButton},
-    props: ['imgUrl', 'userHead', 'username', 'heartNum', 'commentNum'],
+    props: ['imgUrl', 'userHead', 'username', 'heartNum', 'commentNum', 'photoId', 'date', 'title', 'intro'],
     data () {
       return {
         currentDate: new Date(),
@@ -110,6 +110,9 @@
         dialogVisible: false,
         maskShow: false,
         pictureContentShow: false,
+        loginUserHeadUrl: '',
+        commentContent: '',
+        userId: '',
         commentList: [
           {
             img: user3,
@@ -161,7 +164,45 @@
         }
       },
       showDialog: function () {
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/comment/getCommentsById',
+          data: {
+            id: this.photoId
+          }
+        }).then(function (res) {
+          console.log(res)
+          var data = res.data.data
+          self.commentList = data
+          console.log(self.commentList)
+        }).catch(function (err) {
+          console.log(err)
+        })
         this.dialogVisible = true
+      },
+      sendComment: function () {
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/comment/publishComment',
+          data: {
+            vo: {
+              userId: this.userId,
+              photoId: this.photoId,
+              content: this.commentContent,
+              commentNum: this.commentNum
+            }
+          }
+        }).then(function (res) {
+          self.commentContent = ''
+          self.showDialog()
+          self.commentNum += 1
+        }).catch(function (err) {
+          console.log(err)
+        })
       },
       imageMaskEnter: function () {
         this.pictureContentShow = true
@@ -173,29 +214,30 @@
       }
     },
     mounted () {
-      var galleryTop = new Swiper('.gallery-top', {
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        spaceBetween: 10
-      })
-
-      var galleryThumbs = new Swiper('.gallery-thumbs', {
-        spaceBetween: 10,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        touchRatio: 0.2,
-        slideToClickedSlide: true
-      })
-
-      galleryTop.params.control = galleryThumbs
-      galleryThumbs.params.control = galleryTop
+      var token = this.$cookie.get('token')
+      if (token !== '' && token !== null) {
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/user/UserInfo',
+          data: {
+            token: token
+          }
+        }).then(function (res) {
+          var data = res.data.data
+          self.loginUserHeadUrl = data.headUrl
+          self.userId = data.id
+        }).catch(function (err) {
+          alert(err)
+        })
+      }
     }
   }
 </script>
 
 <style>
   @import "../../style/font-awesome-4.7.0/css/font-awesome.min.css";
-  @import "../../../static/swiper.min.css";
 
   /*img{*/
     /*object-fit: cover;*/

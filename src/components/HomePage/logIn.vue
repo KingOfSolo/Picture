@@ -19,9 +19,9 @@
       <div class="form form--login">
         <div class="form--heading">欢迎来到掠影</div>
         <form autocomplete="off">
-          <input type="text" placeholder="账号">
-          <input type="password" placeholder="密码">
-          <button class="button">登录</button>
+          <input type="text" placeholder="账号" v-model="signInUserName">
+          <input type="password" placeholder="密码" v-model="signInPassword">
+          <button class="button" @click="signIn">登录</button>
         </form>
       </div>
     </div>
@@ -31,6 +31,8 @@
 
 <script>
   export default{
+    components: {
+    },
     data () {
       return {
         showSign: false,
@@ -38,11 +40,15 @@
         radio: 1,
         signUpNickName: '',
         signUpUserName: '',
-        signUpPassword: ''
+        signUpPassword: '',
+        signInUserName: '',
+        signInPassword: ''
       }
     },
     methods: {
       signUp () {
+        var self = this
+//        this.$emit('signUpSuccess', 'success')
         this.$http({
           method: 'post',
           dataType: 'JSONP',
@@ -61,7 +67,24 @@
             }
           }
         }).then(function (res) {
-          self.$emit('signUpSuccess', res.data.token)
+          self.$emit('signUpSuccess', res.data.token, '注册成功')
+        }).catch(function (err) {
+          alert(err)
+        })
+      },
+      signIn () {
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/login/signIn',
+          data: {
+            username: this.signInUserName,
+            password: this.signInPassword
+          }
+        }).then(function (res) {
+          console.log(res)
+          self.$emit('signUpSuccess', res.data.token, '登录成功')
         }).catch(function (err) {
           alert(err)
         })

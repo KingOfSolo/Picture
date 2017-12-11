@@ -6,8 +6,11 @@ var cookieParser = require('cookie-parser')
 // var index = require('./server/api/index');
 var user = require('./server/api/user')
 var login = require('./server/api/login')
+var photo = require('./server/api/photo')
+var comment = require('./server/api/comment')
 
 var app = express()
+
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -16,6 +19,8 @@ app.use(cookieParser())
 // app.use('/',index);
 app.use('/user', user)
 app.use('/login', login)
+app.use('/photo', photo)
+app.use('/comment', comment)
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

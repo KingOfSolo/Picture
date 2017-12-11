@@ -15,19 +15,20 @@
     <div style="text-align: center">
       <div class="masonry">
         <div class="item" v-for="item in imgList">
-          <picture-display :img-url="item.imgUrl" :user-head="item.userHead" :username="item.username"
-                           :heart-num="item.heartNum" :comment-num="item.commentNum"></picture-display>
+          <picture-display :img-url="item.photoUrl" :user-head="item.headUrl" :username="item.nickName"
+                           :title="item.title" :intro="item.intro" :heart-num="item.liked" :comment-num="item.commentNum"
+                           :photo-id="item.photoId" :date="item.date"></picture-display>
         </div>
       </div>
       <!--<picture-display></picture-display>-->
     </div>
+    <img :src="imgUrl"/>
   </div>
 
 </template>
 
 <script>
   import pictureDisplay from '../components/HomePage/pictureDisplay.vue'
-  import Swiper from '../../static/swiper.min.js'
   import user3 from '../assets/user3.jpg'
   import user4 from '../assets/user4.jpg'
   import user5 from '../assets/user5.jpg'
@@ -138,6 +139,7 @@
         heartNum: 0,
         dialogVisible: false,
         maskShow: false,
+        imgUrl: '',
         commentList: [
           {
             img: user3,
@@ -201,22 +203,19 @@
       }
     },
     mounted () {
-      var galleryTop = new Swiper('.gallery-top', {
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        spaceBetween: 10
+      var self = this
+      this.$http({
+        method: 'get',
+        dataType: 'JSONP',
+        url: '/photo/getAllPhotos'
+      }).then(function (res) {
+        console.log(res)
+        var data = res.data.data
+        self.imgList = data
+        console.log(self.imgList)
+      }).catch(function (err) {
+        alert(err)
       })
-
-      var galleryThumbs = new Swiper('.gallery-thumbs', {
-        spaceBetween: 10,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        touchRatio: 0.2,
-        slideToClickedSlide: true
-      })
-
-      galleryTop.params.control = galleryThumbs
-      galleryThumbs.params.control = galleryTop
     }
   }
 </script>
@@ -224,7 +223,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   @import "../style/scss/userCenterPicture.css";
-  @import "../../static/swiper.min.css";
 
   #background-image{
     width: 100%;
