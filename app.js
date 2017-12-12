@@ -2,12 +2,14 @@ var express = require('express');
 var cors = require('cors')
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser')
+var path = require('path')
 
 // var index = require('./server/api/index');
 var user = require('./server/api/user')
 var login = require('./server/api/login')
 var photo = require('./server/api/photo')
 var comment = require('./server/api/comment')
+var follow = require('./server/api/follow')
 
 var app = express()
 
@@ -16,11 +18,13 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(cookieParser())
+app.use(express.static(path.join(__dirname, './server/public')));
 // app.use('/',index);
 app.use('/user', user)
 app.use('/login', login)
 app.use('/photo', photo)
 app.use('/comment', comment)
+app.use('/follow', follow)
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

@@ -34,7 +34,8 @@
       <div id="user-center-main">
         <el-tabs type="border-card">
           <el-tab-pane label="图片作品">
-            <user-center-picture :photo-list="photoList" :user-head="userInfo.headUrl" :nick-name="userInfo.nickName"></user-center-picture>
+            <user-center-picture :photo-list="photoList" :user-head="userInfo.headUrl" :nick-name="userInfo.nickName"
+                                 :user-id="userInfo.userId" v-on:storeSuccess="freshPhotoList"></user-center-picture>
           </el-tab-pane>
           <el-tab-pane label="相册作品">
             <user-center-album></user-center-album>
@@ -75,6 +76,23 @@
     },
     methods: {
       followClick: function () {
+      },
+      freshPhotoList: function () {
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/photo/getPhotosByUserId',
+          data: {
+            id: this.userInfo.id
+          }
+        }).then(function (res) {
+          var data = res.data.data
+          self.photoList = data
+          console.log(self.photoList)
+        }).catch(function (err) {
+          alert(err)
+        })
       }
     },
     mounted () {

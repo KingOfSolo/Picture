@@ -12,6 +12,7 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+server/public
 src/theme.css
 src/theme.css.map
 static/swiper.min.css

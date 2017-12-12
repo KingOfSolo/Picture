@@ -13,7 +13,7 @@
       </div>
       <div v-for='item in photoList' class="item">
         <user-center-picture-display :img-url="item.photoUrl" :user-head="userHead" :username="nickName" :img-title="item.title"
-          :heart-num="item.liked" :comment-num="item.commentNum" :date="item.date" :intro="item.intro"></user-center-picture-display>
+          :heart-num="item.liked" :comment-num="item.commentNum" :date="item.date" :intro="item.intro" :photo-id="item.photoId"></user-center-picture-display>
       </div>
     </div>
     <el-dialog
@@ -23,18 +23,19 @@
       <div class="add-picture">
         <div class="add-picture-main">
           <el-upload
-            action="//jsonplaceholder.typicode.com/posts/"
+            action="http://localhost:3000/photo/uploadPhoto"
             list-type="picture-card"
             :on-preview="handlePictureCardPreview"
             :on-remove="handleRemove"
-            :on-success="handleSuccess">
+            :on-success="handleSuccess"
+            :on-change="handleChange">
             <i class="el-icon-plus"></i>
           </el-upload>
         </div>
         <div class="add-picture-form">
           <el-form label-width="80px">
             <el-form-item label="图片名称">
-              <el-input></el-input>
+              <el-input v-model="uploadPhotoTitle"></el-input>
             </el-form-item>
             <el-form-item label="图片标签">
               <div style="text-align: left">
@@ -44,10 +45,11 @@
               </div>
             </el-form-item>
             <el-form-item label="图片描述">
-              <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 5}"></el-input>
+              <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 5}"
+              v-model="uploadPhotoIntro"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" style="width: 100%">确认上传</el-button>
+              <el-button type="primary" style="width: 100%" @click="confirmUpload">确认上传</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -72,7 +74,7 @@
   import user from '../../assets/user.jpg'
 //  import ElUpload from '../../node_modules/element-ui/packages/upload/src/'
   export default{
-    props: ['photoList', 'userHead', 'nickName'],
+    props: ['photoList', 'userHead', 'nickName', 'userId'],
     components: {
 //      ElUpload,
       ElButton,
@@ -159,7 +161,10 @@
         addPictureDialogVisible: false,
         dialogImageUrl: '',
         dialogVisible: false,
-        fileList: ''
+        fileList: '',
+        uploadPhotoUrl: '',
+        uploadPhotoTitle: '',
+        uploadPhotoIntro: ''
       }
     },
     methods: {
@@ -173,6 +178,37 @@
         this.dialogVisible = true
       },
       handleSuccess (file) {
+      },
+      handleChange (file, fileList) {
+        console.log(fileList)
+        if (fileList.length === 1 && fileList[0].response) {
+          this.uploadPhotoUrl = fileList[0].response.filepath
+        }
+      },
+      confirmUpload () {
+        var self = this
+        var userId = this.$cookie.get('loginId')
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/photo/storePhoto',
+          data: {
+            vo: {
+              title: this.uploadPhotoTitle,
+              photoUrl: this.uploadPhotoUrl,
+              userId: userId,
+              intro: this.uploadPhotoIntro
+            }
+          }
+        }).then(function (res) {
+          console.log(res)
+          self.uploadPhotoTitle = ''
+          self.uploadPhotoIntro = ''
+          self.addPictureDialogVisible = false
+          self.$emit('storeSuccess')
+        }).catch(function (err) {
+          console.log(err)
+        })
       }
     }
   }

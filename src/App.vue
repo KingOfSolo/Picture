@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="header">
-      <el-button type="text" id="logo">logo</el-button>
+      <el-button type="text" id="logo" @click="toHome">掠影</el-button>
       <div id="login">
         <div>
           <el-input id="search" placeholder="请输入内容"><img slot="suffix" class="el-input__icon" src="./assets/search.svg"></el-input>
@@ -62,6 +62,9 @@
       }
     },
     methods: {
+      toHome: function () {
+        this.$router.push({name: 'Main'})
+      },
       login: function () {
         this.isLogin = false
         this.$http({
@@ -159,6 +162,7 @@
 
   #logo{
     margin-left: 10%;
+    font-size: large;
   }
 
   /*#search{*/

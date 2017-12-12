@@ -15,7 +15,7 @@
     <div style="text-align: center">
       <div class="masonry">
         <div class="item" v-for="item in imgList">
-          <picture-display :img-url="item.photoUrl" :user-head="item.headUrl" :username="item.nickName"
+          <picture-display :img-url="item.photoUrl" :user-head="item.headUrl" :username="item.nickName" :owner-id="item.id"
                            :title="item.title" :intro="item.intro" :heart-num="item.liked" :comment-num="item.commentNum"
                            :photo-id="item.photoId" :date="item.date"></picture-display>
         </div>

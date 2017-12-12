@@ -5,7 +5,7 @@
         <img :src="imgUrl" class="image"/>
         <div class="image-mask" v-bind:class="{maskOpacity: maskShow}" @click="showDialog"></div>
         <div id="picture-display-bottom" v-if="pictureContentShow">
-          <img :src="userHead"/>
+          <img :src="userHead" @click="toUserCenter"/>
           <span style="cursor: pointer">{{ username }}</span>
           <div id="picture-display-button">
                 <span class="picture-icon" style="padding-right: 10px" v-bind:class="{redColor: isHeart}" @click="heartClick">
@@ -100,7 +100,7 @@
       ElFormItem,
       ElForm,
       ElButton},
-    props: ['imgUrl', 'userHead', 'username', 'heartNum', 'commentNum', 'photoId', 'date', 'title', 'intro'],
+    props: ['imgUrl', 'userHead', 'username', 'heartNum', 'commentNum', 'photoId', 'date', 'title', 'intro', 'ownerId'],
     data () {
       return {
         currentDate: new Date(),
@@ -211,6 +211,9 @@
       imageMaskLeave: function () {
         this.pictureContentShow = false
         this.maskShow = false
+      },
+      toUserCenter: function () {
+        this.$router.push({name: 'UserCenter', params: {userId: this.ownerId}})
       }
     },
     mounted () {
