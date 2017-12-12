@@ -34,7 +34,8 @@
               <div class="date">{{ date }}</div>
             </span>
             <div style="display: flex;flex-direction: row;justify-content: flex-end;align-items: center;flex-grow: 1;">
-              <el-button type="primary">关注</el-button>
+              <el-button type="primary" @click="follow" v-if="!isFollow">关注</el-button>
+              <el-button type="danger" v-else>已关注</el-button>
             </div>
           </div>
           <div class="aside-post-content">
@@ -106,13 +107,13 @@
         currentDate: new Date(),
         showMask: false,
         isHeart: false,
-        heartNum: 0,
         dialogVisible: false,
         maskShow: false,
         pictureContentShow: false,
         loginUserHeadUrl: '',
         commentContent: '',
         userId: '',
+        isFollow: false,
         commentList: [
           {
             img: user3,
@@ -155,13 +156,20 @@
     },
     methods: {
       heartClick: function () {
-        if (this.isHeart) {
-          this.isHeart = !this.isHeart
-          this.heartNum -= 1
-        } else {
-          this.isHeart = !this.isHeart
-          this.heartNum += 1
-        }
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/like/like',
+          data: {
+            photoId: this.photoId
+          }
+        }).then(function (res) {
+          self.isHeart = true
+          self.heartNum += 1
+        }).catch(function (err) {
+          console.log(err)
+        })
       },
       showDialog: function () {
         var self = this
@@ -214,6 +222,27 @@
       },
       toUserCenter: function () {
         this.$router.push({name: 'UserCenter', params: {userId: this.ownerId}})
+      },
+      follow: function () {
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/follow/follow',
+          data: {
+            vo: {
+              userId: this.ownerId,
+              followUserId: this.userId
+            }
+          }
+        }).then(function (res) {
+          self.isFollow = true
+//          self.commentContent = ''
+//          self.showDialog()
+//          self.commentNum += 1
+        }).catch(function (err) {
+          console.log(err)
+        })
       }
     },
     mounted () {

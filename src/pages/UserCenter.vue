@@ -41,10 +41,10 @@
             <user-center-album></user-center-album>
           </el-tab-pane>
           <el-tab-pane label="关注">
-            <user-center-follow></user-center-follow>
+            <user-center-follow :follow-list="followList"></user-center-follow>
           </el-tab-pane>
           <el-tab-pane label="粉丝">
-            <user-center-fans></user-center-fans>
+            <user-center-fans :fans-list="fansList"></user-center-fans>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -71,7 +71,17 @@
         userInfo: {
         },
         photoList: {
+        },
+        followList: {
+        },
+        fansList: {
         }
+      }
+    },
+    watch: {
+      '$route': function (route) {
+        var query = route.query
+        this.page = query.page
       }
     },
     methods: {
@@ -124,6 +134,36 @@
         var data = res.data.data
         self.photoList = data
         console.log(self.photoList)
+      }).catch(function (err) {
+        alert(err)
+      })
+
+      this.$http({
+        method: 'post',
+        dataType: 'JSONP',
+        url: '/follow/getFollowList',
+        data: {
+          followUserId: userId
+        }
+      }).then(function (res) {
+        var data = res.data.data
+        self.followList = data
+        console.log(self.followList)
+      }).catch(function (err) {
+        alert(err)
+      })
+
+      this.$http({
+        method: 'post',
+        dataType: 'JSONP',
+        url: '/follow/getFansList',
+        data: {
+          userId: userId
+        }
+      }).then(function (res) {
+        var data = res.data.data
+        self.fansList = data
+        console.log(self.fansList)
       }).catch(function (err) {
         alert(err)
       })

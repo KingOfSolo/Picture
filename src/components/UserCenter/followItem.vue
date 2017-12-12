@@ -1,28 +1,56 @@
 <template>
   <div class="follow-item">
     <div class="follow-item-head-background">
-      <img :src="userHead"/>
+      <img :src="userHead" @click="userCenter"/>
     </div>
     <div style="height: 80px">
     </div>
     <div>
-      <span class="follow-item-username">{{username}}</span>
+      <span class="follow-item-username" @click="userCenter">{{username}}</span>
     </div>
     <div class="follow-item-follow-container">
       <div style="border: 1px solid #e0e0e0;border-width: 1px 0 1px 0;padding: 10px 0 10px 0">
         <span class="follow-item-follow">关注 {{followNum}}</span>
         <span class="follow-item-fans">粉丝 {{fansNum}}</span>
       </div>
-      <el-button type="primary" size="medium" class="follow-item-button">+关注</el-button>
+      <el-button type="primary" size="medium" class="follow-item-button" v-if="!follow" @click="followClick">+关注</el-button>
+      <el-button type="danger" size="medium" class="follow-item-button" v-else>已关注</el-button>
     </div>
   </div>
 </template>
 
 <script>
+  import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
   export default{
-    props: ['userHead', 'username', 'followNum', 'fansNum'],
+    components: {ElButton},
+    props: ['userHead', 'username', 'followNum', 'fansNum', 'userId'],
     data () {
       return {
+        follow: false
+      }
+    },
+    methods: {
+      userCenter: function () {
+        this.$router.push({name: 'UserCenter', params: {userId: this.userId}})
+      },
+      followClick: function () {
+        var loginId = this.$cookie.get('loginId')
+        var self = this
+        this.$http({
+          method: 'post',
+          dataType: 'JSONP',
+          url: '/follow/follow',
+          data: {
+            vo: {
+              userId: this.userId,
+              followUserId: loginId
+            }
+          }
+        }).then(function (res) {
+          self.follow = true
+        }).catch(function (err) {
+          console.log(err)
+        })
       }
     }
   }

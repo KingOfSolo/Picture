@@ -10,6 +10,7 @@ var login = require('./server/api/login')
 var photo = require('./server/api/photo')
 var comment = require('./server/api/comment')
 var follow = require('./server/api/follow')
+var like = require('./server/api/like')
 
 var app = express()
 
@@ -25,6 +26,7 @@ app.use('/login', login)
 app.use('/photo', photo)
 app.use('/comment', comment)
 app.use('/follow', follow)
+app.use('/like', like)
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
