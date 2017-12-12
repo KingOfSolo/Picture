@@ -7,8 +7,8 @@
           <el-input id="search" placeholder="请输入内容"><img slot="suffix" class="el-input__icon" src="./assets/search.svg"></el-input>
         </div>
         <div v-if="isLogin">
-          <el-button type="text" class="header-button" @click="login">登录</el-button>
-          <el-button type="text" class="header-button" @click="loginDialogVisible = true">注册</el-button>
+          <!--<el-button type="text" class="header-button" @click="login">登录</el-button>-->
+          <el-button type="text" class="header-button" @click="loginDialogVisible = true">登录</el-button>
         </div>
         <div v-else>
           <el-dropdown style="margin-left: 10px" @command="handleCommand">

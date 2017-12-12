@@ -409,6 +409,10 @@
     justify-content: center;
   }
 
+  .picture-main img{
+    object-fit: cover;
+  }
+
   .swiper-container {
     width: 100%;
     height: 300px;

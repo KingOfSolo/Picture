@@ -26,22 +26,10 @@
     },
     methods: {
       test: function () {
-        alert(this.photoNum)
+//        alert(this.photoNum)
       }
     },
     computed: {
-//      showImage2: function () {
-//        if (this.photoNumber >= 2) {
-//          return true
-//        }
-//        return false
-//      },
-//      showImage3: function () {
-//        if (this.photoNumber >= 3) {
-//          return true
-//        }
-//        return false
-//      }
     }
   }
 </script>

@@ -11,7 +11,7 @@
             <span v-if="showSignature" id="user-setting-header-introduce">{{ signature}}</span>
             <el-input v-else v-model="signature" id="signature-input" maxlength="40"></el-input>
             <div id="user-setting-header-introduce-button">
-              <el-button v-if="showSignature" size="medium" @click="showSignature = false; beforeSignature = signature">修改个性签名</el-button>
+              <!--<el-button v-if="showSignature" size="medium" @click="showSignature = false; beforeSignature = signature">修改个性签名</el-button>-->
             </div>
           </div>
         </div>
@@ -24,14 +24,6 @@
             <span slot="label">个人资料</span>
             <user-info></user-info>
           </el-tab-pane>
-          <el-tab-pane>
-            <span slot="label">我的关注</span>
-            我的关注
-          </el-tab-pane>
-          <el-tab-pane>
-            <span slot="label">角色管理</span>
-            角色管理</el-tab-pane>
-          <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
         </el-tabs>
       </div>
     </div>
